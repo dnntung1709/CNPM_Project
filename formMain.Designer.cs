@@ -1,0 +1,252 @@
+﻿namespace CNPM_Project
+{
+    partial class formMain
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
+            this.orderList = new CNPM_Project.orderList();
+            this.orderBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this._OrderTableAdapter = new CNPM_Project.orderListTableAdapters._OrderTableAdapter();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dgvOrder = new System.Windows.Forms.DataGridView();
+            this.bLogout = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bChangePassword = new System.Windows.Forms.Button();
+            this.dgvOrderItem = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lbHelloUser = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.orderListBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.orderList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderItem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderListBindingSource)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // orderList
+            // 
+            this.orderList.DataSetName = "orderList";
+            this.orderList.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // orderBindingSource
+            // 
+            this.orderBindingSource.DataMember = "_Order";
+            this.orderBindingSource.DataSource = this.orderList;
+            // 
+            // _OrderTableAdapter
+            // 
+            this._OrderTableAdapter.ClearBeforeFill = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.dgvOrder);
+            this.groupBox1.Location = new System.Drawing.Point(11, 262);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(704, 346);
+            this.groupBox1.TabIndex = 1;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Order List";
+            // 
+            // dgvOrder
+            // 
+            this.dgvOrder.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrder.Location = new System.Drawing.Point(6, 21);
+            this.dgvOrder.Name = "dgvOrder";
+            this.dgvOrder.RowHeadersWidth = 51;
+            this.dgvOrder.RowTemplate.Height = 24;
+            this.dgvOrder.Size = new System.Drawing.Size(692, 319);
+            this.dgvOrder.TabIndex = 0;
+            this.dgvOrder.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvOrder_CellClick);
+            // 
+            // bLogout
+            // 
+            this.bLogout.Location = new System.Drawing.Point(958, 233);
+            this.bLogout.Name = "bLogout";
+            this.bLogout.Size = new System.Drawing.Size(75, 23);
+            this.bLogout.TabIndex = 2;
+            this.bLogout.Text = "Logout";
+            this.bLogout.UseVisualStyleBackColor = true;
+            this.bLogout.Click += new System.EventHandler(this.bLogout_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.dgvOrderItem);
+            this.groupBox2.Location = new System.Drawing.Point(727, 262);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(306, 223);
+            this.groupBox2.TabIndex = 3;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Item List";
+            // 
+            // bChangePassword
+            // 
+            this.bChangePassword.Location = new System.Drawing.Point(806, 233);
+            this.bChangePassword.Name = "bChangePassword";
+            this.bChangePassword.Size = new System.Drawing.Size(146, 23);
+            this.bChangePassword.TabIndex = 4;
+            this.bChangePassword.Text = "Change password";
+            this.bChangePassword.UseVisualStyleBackColor = true;
+            this.bChangePassword.Click += new System.EventHandler(this.bChangePassword_Click);
+            // 
+            // dgvOrderItem
+            // 
+            this.dgvOrderItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrderItem.Location = new System.Drawing.Point(6, 21);
+            this.dgvOrderItem.Name = "dgvOrderItem";
+            this.dgvOrderItem.RowHeadersWidth = 51;
+            this.dgvOrderItem.RowTemplate.Height = 24;
+            this.dgvOrderItem.Size = new System.Drawing.Size(294, 196);
+            this.dgvOrderItem.TabIndex = 0;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(937, 491);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(96, 55);
+            this.button3.TabIndex = 5;
+            this.button3.Text = "Update order";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(938, 556);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 52);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Delete order";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(727, 491);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(205, 117);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "Create order";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(286, 155);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(509, 29);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "COMPUTER SHOP MANAGEMENT SYSTEM";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbHelloUser
+            // 
+            this.lbHelloUser.AutoSize = true;
+            this.lbHelloUser.Location = new System.Drawing.Point(495, 234);
+            this.lbHelloUser.MaximumSize = new System.Drawing.Size(200, 0);
+            this.lbHelloUser.MinimumSize = new System.Drawing.Size(300, 21);
+            this.lbHelloUser.Name = "lbHelloUser";
+            this.lbHelloUser.Size = new System.Drawing.Size(300, 21);
+            this.lbHelloUser.TabIndex = 9;
+            this.lbHelloUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(11, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1022, 134);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 10;
+            this.pictureBox1.TabStop = false;
+            // 
+            // orderListBindingSource
+            // 
+            this.orderListBindingSource.DataSource = this.orderList;
+            this.orderListBindingSource.Position = 0;
+            // 
+            // formMain
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1047, 620);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.lbHelloUser);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.bChangePassword);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.bLogout);
+            this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
+            this.Name = "formMain";
+            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Main";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formMain_FormClosing);
+            this.Load += new System.EventHandler(this.formMain_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.orderList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderItem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.orderListBindingSource)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+        private orderList orderList;
+        private System.Windows.Forms.BindingSource orderBindingSource;
+        private orderListTableAdapters._OrderTableAdapter _OrderTableAdapter;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataGridView dgvOrder;
+        private System.Windows.Forms.Button bLogout;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button bChangePassword;
+        private System.Windows.Forms.DataGridView dgvOrderItem;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbHelloUser;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.BindingSource orderListBindingSource;
+    }
+}
