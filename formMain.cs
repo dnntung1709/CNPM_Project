@@ -13,6 +13,7 @@ namespace CNPM_Project
 {
     public partial class formMain : Form
     {
+        string role;
         formReport report;
         formLogin login;
         formChangePassword changePassword;
@@ -23,10 +24,11 @@ namespace CNPM_Project
         SqlCommand command;
         SqlDataAdapter adapter;
         DataTable dtb;
-        public formMain(string username,formLogin login)
+        public formMain(string username,string role,formLogin login)
         {
             InitializeComponent();
             this.username = username;
+            this.role = role;
             this.login = login;
         }
         public void refreshOrderList()
@@ -44,6 +46,27 @@ namespace CNPM_Project
         }
         private void formMain_Load(object sender, EventArgs e)
         {
+            MessageBox.Show(role);
+            switch (this.role)
+            {
+                case "ShopOwner":
+                    {
+                        break;
+                    }
+                case "Seller":
+                    {
+                        tControl.TabPages.Remove(tShopOwner);
+                        tControl.TabPages.Remove(tManager);
+                        break;
+                    }
+                case "Manager":
+                    {
+                        tControl.TabPages.Remove(tSeller);
+                        tControl.TabPages.Remove(tShopOwner);
+                        break;
+                    }
+
+            }
             con = new SqlConnection(@"Data Source=DESKTOP-BNGI722;Initial Catalog=CNPM_Project;Integrated Security=True");
             refreshOrderList();
             refreshProductList();

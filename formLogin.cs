@@ -36,19 +36,66 @@ namespace CNPM_Project
 
             adapter.Fill(dtb);
 
-            if (dtb.Rows.Count == 1)
+            if (dtb.Rows.Count > 0)
             {
+                formMain obj;
+                query = "select * from _ShopOwner where username='" + tbUsername.Text + "'";
+                adapter = new SqlDataAdapter(query, con);
+                dtb = new DataTable();
 
-                con.Close();
-                formMain obj = new formMain(tbUsername.Text,this);
-                this.Hide();
+                adapter.Fill(dtb);
+                if (dtb.Rows.Count > 0)
+                {
+                     obj = new formMain(tbUsername.Text,"ShopOwner", this);
+                    con.Close();
 
-                obj.Show();
+                    this.Hide();
+
+                    obj.Show();
+                }
+                else
+                {
+                    query = "select * from _Manager where username='" + tbUsername.Text + "'";
+                    adapter = new SqlDataAdapter(query, con);
+                    dtb = new DataTable();
+
+                    adapter.Fill(dtb);
+                    if (dtb.Rows.Count > 0)
+                    {
+                        obj = new formMain(tbUsername.Text, "Manager", this);
+                        con.Close();
+
+                        this.Hide();
+
+                        obj.Show();
+                    }
+                    else
+                    {
+                        query = "select * from _Seller where username='" + tbUsername.Text + "'";
+                        adapter = new SqlDataAdapter(query, con);
+                        dtb = new DataTable();
+
+                        adapter.Fill(dtb);
+                        if (dtb.Rows.Count > 0)
+                        {
+                            obj = new formMain(tbUsername.Text, "Seller", this);
+                            con.Close();
+
+                            this.Hide();
+
+                            obj.Show();
+                        }
+                    }
+                }
+                
+                
+                
             }
             else
             {
                 MessageBox.Show("Invalid username or password, please retry!");
             }
+            con.Close();
             
         }
 
