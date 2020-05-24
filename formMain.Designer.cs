@@ -39,13 +39,14 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvOrderItem = new System.Windows.Forms.DataGridView();
             this.bChangePassword = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bUpdateOrder = new System.Windows.Forms.Button();
+            this.bClear = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.lbHelloUser = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.orderListBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bCreateOrder = new System.Windows.Forms.Button();
+            this.bDeleteOrder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.orderList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -131,23 +132,25 @@
             this.bChangePassword.UseVisualStyleBackColor = true;
             this.bChangePassword.Click += new System.EventHandler(this.bChangePassword_Click);
             // 
-            // button3
+            // bUpdateOrder
             // 
-            this.button3.Location = new System.Drawing.Point(937, 491);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 55);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Update order";
-            this.button3.UseVisualStyleBackColor = true;
+            this.bUpdateOrder.Location = new System.Drawing.Point(897, 491);
+            this.bUpdateOrder.Name = "bUpdateOrder";
+            this.bUpdateOrder.Size = new System.Drawing.Size(136, 35);
+            this.bUpdateOrder.TabIndex = 5;
+            this.bUpdateOrder.Text = "Update order";
+            this.bUpdateOrder.UseVisualStyleBackColor = true;
+            this.bUpdateOrder.Click += new System.EventHandler(this.bUpdateOrder_Click);
             // 
-            // button1
+            // bClear
             // 
-            this.button1.Location = new System.Drawing.Point(938, 556);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 52);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "Delete order";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bClear.Location = new System.Drawing.Point(897, 573);
+            this.bClear.Name = "bClear";
+            this.bClear.Size = new System.Drawing.Size(137, 35);
+            this.bClear.TabIndex = 5;
+            this.bClear.Text = "Clear selection";
+            this.bClear.UseVisualStyleBackColor = true;
+            this.bClear.Click += new System.EventHandler(this.bClear_Click);
             // 
             // label3
             // 
@@ -191,11 +194,21 @@
             // 
             this.bCreateOrder.Location = new System.Drawing.Point(727, 491);
             this.bCreateOrder.Name = "bCreateOrder";
-            this.bCreateOrder.Size = new System.Drawing.Size(205, 117);
+            this.bCreateOrder.Size = new System.Drawing.Size(164, 117);
             this.bCreateOrder.TabIndex = 5;
             this.bCreateOrder.Text = "Create Order";
             this.bCreateOrder.UseVisualStyleBackColor = true;
             this.bCreateOrder.Click += new System.EventHandler(this.bCreateOrder_Click);
+            // 
+            // bDeleteOrder
+            // 
+            this.bDeleteOrder.Location = new System.Drawing.Point(897, 532);
+            this.bDeleteOrder.Name = "bDeleteOrder";
+            this.bDeleteOrder.Size = new System.Drawing.Size(137, 35);
+            this.bDeleteOrder.TabIndex = 5;
+            this.bDeleteOrder.Text = "Delete order";
+            this.bDeleteOrder.UseVisualStyleBackColor = true;
+            this.bDeleteOrder.Click += new System.EventHandler(this.bDeleteOrder_Click);
             // 
             // formMain
             // 
@@ -205,9 +218,10 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbHelloUser);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bDeleteOrder);
+            this.Controls.Add(this.bClear);
             this.Controls.Add(this.bCreateOrder);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.bUpdateOrder);
             this.Controls.Add(this.bChangePassword);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bLogout);
@@ -243,12 +257,13 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bChangePassword;
         private System.Windows.Forms.DataGridView dgvOrderItem;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bUpdateOrder;
+        private System.Windows.Forms.Button bClear;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lbHelloUser;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.BindingSource orderListBindingSource;
         private System.Windows.Forms.Button bCreateOrder;
+        private System.Windows.Forms.Button bDeleteOrder;
     }
 }

@@ -22,29 +22,38 @@ namespace CNPM_Project
             InitializeComponent();
             this.username = username;
         }
-
-        private void formMain_Load(object sender, EventArgs e)
+        public void refreshOrderList()
         {
-            con = new SqlConnection(@"Data Source=DESKTOP-BNGI722;Initial Catalog=CNPM_Project;Integrated Security=True");
-            string query;
-
             con.Open();
 
-            query = "select name from _ShopUser where username='" + this.username + "'";
+            string query = "select name from _ShopUser where username='" + this.username + "'";
             adapter = new SqlDataAdapter(query, con);
             dtb = new DataTable();
             adapter.Fill(dtb);
 
-            lbHelloUser.Text = "Hello, "+dtb.Rows[0]["name"].ToString();
+            lbHelloUser.Text = "Hello, " + dtb.Rows[0]["name"].ToString();
 
             query = "select * from _Order";
-            adapter = new SqlDataAdapter(query,con);
+            adapter = new SqlDataAdapter(query, con);
             dtb = new DataTable();
             adapter.Fill(dtb);
 
             dgvOrder.DataSource = dtb;
 
             con.Close();
+        }
+        private void formMain_Load(object sender, EventArgs e)
+        {
+            con = new SqlConnection(@"Data Source=DESKTOP-BNGI722;Initial Catalog=CNPM_Project;Integrated Security=True");
+            this.refreshOrderList();
+
+            dgvOrder.ClearSelection();
+            dgvOrderItem.ClearSelection();
+
+            bCreateOrder.Enabled = true;
+            bClear.Enabled = true;
+            bDeleteOrder.Enabled = false;
+            bUpdateOrder.Enabled = false;
         }
         
 
@@ -57,7 +66,7 @@ namespace CNPM_Project
 
         private void bChangePassword_Click(object sender, EventArgs e)
         {
-            formChangePassword obj = new formChangePassword(username);
+            formChangePassword obj = new formChangePassword(username,this);
 
             obj.Show();
         }
@@ -67,16 +76,25 @@ namespace CNPM_Project
             con.Open();
 
             int i = dgvOrder.SelectedCells[0].RowIndex;
-            string order_ID = dgvOrder.Rows[i].Cells[0].Value.ToString();
-            
-            if (order_ID != "")
+
+            if (dgvOrder.Rows[i].Cells[0].Value!=null)
             {
-                string query = "select * from _OrderItem where order_ID=" + order_ID;
-                adapter = new SqlDataAdapter(query, con);
+                bUpdateOrder.Enabled = true;
+                bDeleteOrder.Enabled = true;
+                bCreateOrder.Enabled = false;
+
+                string query = "select * from _OrderItem where order_ID=" + dgvOrder.Rows[i].Cells[0].Value.ToString();
                 dtb = new DataTable();
+                adapter = new SqlDataAdapter(query, con);
                 adapter.Fill(dtb);
 
                 dgvOrderItem.DataSource = dtb;
+            }
+            else
+            {
+                bUpdateOrder.Enabled = false;
+                bDeleteOrder.Enabled = false;
+                bCreateOrder.Enabled = true;
             }
 
             con.Close();
@@ -94,9 +112,46 @@ namespace CNPM_Project
 
         private void bCreateOrder_Click(object sender, EventArgs e)
         {
-            formCreateOrder obj = new formCreateOrder();
+            formCreateOrder obj = new formCreateOrder(this);
 
             obj.Show();
+        }
+
+        private void Obj_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            con.Open();
+
+            string query = "select * from _Order";
+            adapter = new SqlDataAdapter(query, con);
+            dtb = new DataTable();
+            adapter.Fill(dtb);
+
+            dgvOrder.DataSource = dtb;
+
+            con.Close();
+        }
+
+        private void bDeleteOrder_Click(object sender, EventArgs e)
+        {
+            con.Open();
+        }
+
+        private void bUpdateOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bClear_Click(object sender, EventArgs e)
+        {
+            dtb = new DataTable();
+            dgvOrderItem.DataSource = dtb;
+
+            dgvOrder.ClearSelection();
+            dgvOrderItem.ClearSelection();
+
+            bCreateOrder.Enabled = true;
+            bDeleteOrder.Enabled = false;
+            bUpdateOrder.Enabled = false;
         }
     }
 }

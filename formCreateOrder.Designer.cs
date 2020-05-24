@@ -44,7 +44,7 @@
             this.lbProductName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.bConfirmOrder = new System.Windows.Forms.Button();
+            this.bCreateOrder = new System.Windows.Forms.Button();
             this.bCancelOrder = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.lbTotalAmount = new System.Windows.Forms.Label();
@@ -158,7 +158,7 @@
             this.bUpdateOrderItem.TabIndex = 4;
             this.bUpdateOrderItem.Text = "Update item from the order";
             this.bUpdateOrderItem.UseVisualStyleBackColor = true;
-            this.bUpdateOrderItem.Click += new System.EventHandler(this.bCreateOrderItem_Click);
+            this.bUpdateOrderItem.Click += new System.EventHandler(this.bUpdateOrderItem_Click);
             // 
             // tbProductID
             // 
@@ -220,14 +220,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Customer info";
             // 
-            // bConfirmOrder
+            // bCreateOrder
             // 
-            this.bConfirmOrder.Location = new System.Drawing.Point(506, 12);
-            this.bConfirmOrder.Name = "bConfirmOrder";
-            this.bConfirmOrder.Size = new System.Drawing.Size(143, 67);
-            this.bConfirmOrder.TabIndex = 7;
-            this.bConfirmOrder.Text = "Create Order";
-            this.bConfirmOrder.UseVisualStyleBackColor = true;
+            this.bCreateOrder.Location = new System.Drawing.Point(506, 12);
+            this.bCreateOrder.Name = "bCreateOrder";
+            this.bCreateOrder.Size = new System.Drawing.Size(143, 67);
+            this.bCreateOrder.TabIndex = 7;
+            this.bCreateOrder.Text = "Create Order";
+            this.bCreateOrder.UseVisualStyleBackColor = true;
+            this.bCreateOrder.Click += new System.EventHandler(this.bCreateOrder_Click);
             // 
             // bCancelOrder
             // 
@@ -330,7 +331,7 @@
             this.Controls.Add(this.lbTotalAmount);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.bCancelOrder);
-            this.Controls.Add(this.bConfirmOrder);
+            this.Controls.Add(this.bCreateOrder);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -339,7 +340,7 @@
             this.Name = "formCreateOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create order";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formCreateOrder_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.formCreateOrder_FormClosed);
             this.Load += new System.EventHandler(this.formCreateOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -369,7 +370,7 @@
         private System.Windows.Forms.Label lbProductName;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button bConfirmOrder;
+        private System.Windows.Forms.Button bCreateOrder;
         private System.Windows.Forms.Button bCancelOrder;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbTotalAmount;

@@ -13,15 +13,17 @@ namespace CNPM_Project
 {
     public partial class formChangePassword : Form
     {
+        formMain main;
         string username;
         SqlConnection con;
         SqlDataAdapter adapter;
         SqlCommand command;
         DataTable dtb;
-        public formChangePassword(string username)
+        public formChangePassword(string username,formMain main)
         {
             InitializeComponent();
             this.username = username;
+            this.main = main;
         }
 
         private void bCancel_Click(object sender, EventArgs e)
@@ -67,6 +69,11 @@ namespace CNPM_Project
             {
                 MessageBox.Show("Invalid input! Please retry!");
             }
+        }
+
+        private void formChangePassword_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            main.refreshOrderList();
         }
     }
 }
