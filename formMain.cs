@@ -91,5 +91,12 @@ namespace CNPM_Project
                 e.Cancel = true;
             }
         }
+
+        private void bCreateOrder_Click(object sender, EventArgs e)
+        {
+            formCreateOrder obj = new formCreateOrder();
+
+            obj.Show();
+        }
     }
 }

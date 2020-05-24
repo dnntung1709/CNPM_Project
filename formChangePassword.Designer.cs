@@ -74,7 +74,7 @@
             // 
             this.bApply.Location = new System.Drawing.Point(224, 100);
             this.bApply.Name = "bApply";
-            this.bApply.Size = new System.Drawing.Size(75, 23);
+            this.bApply.Size = new System.Drawing.Size(75, 34);
             this.bApply.TabIndex = 2;
             this.bApply.Text = "Apply";
             this.bApply.UseVisualStyleBackColor = true;
@@ -84,7 +84,7 @@
             // 
             this.bCancel.Location = new System.Drawing.Point(305, 100);
             this.bCancel.Name = "bCancel";
-            this.bCancel.Size = new System.Drawing.Size(75, 23);
+            this.bCancel.Size = new System.Drawing.Size(75, 34);
             this.bCancel.TabIndex = 2;
             this.bCancel.Text = "Cancel";
             this.bCancel.UseVisualStyleBackColor = true;

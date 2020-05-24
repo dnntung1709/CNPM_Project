@@ -47,6 +47,7 @@ namespace CNPM_Project
             {
                 MessageBox.Show("Invalid username or password, please retry!");
             }
+            con.Close();
         }
 
         private void bExit_Click(object sender, EventArgs e)
