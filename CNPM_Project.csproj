@@ -70,6 +70,12 @@
     <Compile Include="formMain.Designer.cs">
       <DependentUpon>formMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="formReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formReport.Designer.cs">
+      <DependentUpon>formReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="orderList.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formMain.resx">
       <DependentUpon>formMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formReport.resx">
+      <DependentUpon>formReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -75,5 +75,10 @@ namespace CNPM_Project
         {
             main.refreshOrderList();
         }
+
+        private void formChangePassword_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

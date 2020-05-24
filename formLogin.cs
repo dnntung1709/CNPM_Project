@@ -38,16 +38,18 @@ namespace CNPM_Project
 
             if (dtb.Rows.Count == 1)
             {
-                formMain obj = new formMain(tbUsername.Text);
 
+                con.Close();
+                formMain obj = new formMain(tbUsername.Text,this);
                 this.Hide();
+
                 obj.Show();
             }
             else
             {
                 MessageBox.Show("Invalid username or password, please retry!");
             }
-            con.Close();
+            
         }
 
         private void bExit_Click(object sender, EventArgs e)
@@ -58,11 +60,6 @@ namespace CNPM_Project
         private void lbForgotPassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             MessageBox.Show("Please contact shop owner to reset your password, cheer <3");
-        }
-
-        private void formLogin_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
     }
 }

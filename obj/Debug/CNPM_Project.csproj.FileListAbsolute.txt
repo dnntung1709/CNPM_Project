@@ -11,3 +11,4 @@ G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug
 G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formMain.resources
 G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formChangePassword.resources
 G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formCreateOrder.resources
+G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formReport.resources
