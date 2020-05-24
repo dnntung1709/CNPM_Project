@@ -103,7 +103,6 @@
             this.Controls.Add(this.tbOldPassword);
             this.Name = "formChangePassword";
             this.Text = "Change Password";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formChangePassword_FormClosing);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.formChangePassword_FormClosed);
             this.Load += new System.EventHandler(this.formChangePassword_Load);
             this.ResumeLayout(false);

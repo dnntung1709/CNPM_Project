@@ -81,12 +81,9 @@ namespace CNPM_Project
 
         private void bChangePassword_Click(object sender, EventArgs e)
         {
-            if (changePassword==null)
-            {
                 changePassword = new formChangePassword(username, this);
 
                 changePassword.Show();
-            }
         }
 
         private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -135,12 +132,9 @@ namespace CNPM_Project
 
         private void bCreateOrder_Click(object sender, EventArgs e)
         {
-            if (createOrder == null)
-            {
                 createOrder = new formCreateOrder(this);
 
                 createOrder.Show();
-            }
         }
         
         private void bDeleteOrder_Click(object sender, EventArgs e)
@@ -578,12 +572,9 @@ namespace CNPM_Project
 
         private void bReport_Click(object sender, EventArgs e)
         {
-            if (report == null)
-            {
                 report = new formReport(this);
 
                 report.Show();
-            }
             
         }
     }

@@ -43,7 +43,7 @@ namespace CNPM_Project
 
             adapter.Fill(dtb);
 
-            lbTotalSoldProducts.Text = dtb.Rows.Count.ToString();
+            lbTotalSoldProducts.Text = dtb.Rows[0][0].ToString();
 
             query = "select sum(total_amount) from _Order";
             adapter = new SqlDataAdapter(query, con);
@@ -51,7 +51,7 @@ namespace CNPM_Project
 
             adapter.Fill(dtb);
 
-            lbTotalRevenue.Text = dtb.Rows.Count.ToString();
+            lbTotalRevenue.Text = dtb.Rows[0][0].ToString();
         }
 
         private void formReport_FormClosing(object sender, FormClosingEventArgs e)
