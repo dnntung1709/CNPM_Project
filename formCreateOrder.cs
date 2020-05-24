@@ -115,7 +115,8 @@ namespace CNPM_Project
         private void dgvItemList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int i = dgvItemList.SelectedCells[0].RowIndex;
-            if (dgvItemList.Rows[i].Cells[0].Value!= null & dgvItemList.Rows[i].Cells[1].Value!=null & dgvItemList.Rows[i].Cells[2].Value!=null)
+
+            if (dgvItemList.Rows[i].Cells[0].Value != null & dgvItemList.Rows[i].Cells[1].Value != null & dgvItemList.Rows[i].Cells[2].Value != null)
             {
                 bUpdateOrderItem.Enabled = true;
                 bDeleteOrderItem.Enabled = true;
@@ -125,10 +126,35 @@ namespace CNPM_Project
                 tbProductName.Text = dgvItemList.Rows[i].Cells[1].Value.ToString();
                 tbQuantity.Text = dgvItemList.Rows[i].Cells[2].Value.ToString();
             }
+            else
+            {
+                bUpdateOrderItem.Enabled = false;
+                bDeleteOrderItem.Enabled = false;
+                bCreateOrderItem.Enabled = true;
+
+                tbProductID.Text = "";
+                tbProductName.Text = "";
+                tbQuantity.Text = "";
+            }
         }
 
         private void bClear_Click(object sender, EventArgs e)
         {
+            bUpdateOrderItem.Enabled = false;
+            bDeleteOrderItem.Enabled = false;
+            bCreateOrderItem.Enabled = true;
+
+            dgvItemList.ClearSelection();
+            tbProductID.Text = "";
+            tbProductName.Text = "";
+            tbQuantity.Text = "";
+        }
+
+        private void bDeleteOrderItem_Click(object sender, EventArgs e)
+        {
+            int i = dgvItemList.SelectedCells[0].RowIndex;
+            dgvItemList.Rows.RemoveAt(i);
+
             bUpdateOrderItem.Enabled = false;
             bDeleteOrderItem.Enabled = false;
             bCreateOrderItem.Enabled = true;

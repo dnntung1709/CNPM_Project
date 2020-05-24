@@ -300,7 +300,7 @@
             this.bDeleteOrderItem.TabIndex = 4;
             this.bDeleteOrderItem.Text = "Delete item from the order";
             this.bDeleteOrderItem.UseVisualStyleBackColor = true;
-            this.bDeleteOrderItem.Click += new System.EventHandler(this.bCreateOrderItem_Click);
+            this.bDeleteOrderItem.Click += new System.EventHandler(this.bDeleteOrderItem_Click);
             // 
             // bCreateOrderItem
             // 
