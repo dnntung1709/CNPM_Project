@@ -187,9 +187,13 @@ namespace CNPM_Project
 
         private void bCreateOrder_Click(object sender, EventArgs e)
         {
-            createOrder = new formCreateOrder(this);
+            createOrder = new formCreateOrder();
 
             createOrder.ShowDialog();
+
+            firstState_Account();
+            firstState_Order();
+            firstState_Product();
         }
         
         private void bDeleteOrder_Click(object sender, EventArgs e)
@@ -546,16 +550,24 @@ namespace CNPM_Project
 
         private void bReport_Click(object sender, EventArgs e)
         {
-            report = new formReport(this);
+            report = new formReport();
 
             report.ShowDialog();
+
+            firstState_Account();
+            firstState_Order();
+            firstState_Product();
         }
 
         private void bAccount_Click(object sender, EventArgs e)
         {
-            account = new formAccount(this);
+            account = new formAccount(this.username);
 
             account.ShowDialog();
+
+            firstState_Account();
+            firstState_Order();
+            firstState_Product();
         }
     }
 }

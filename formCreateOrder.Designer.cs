@@ -340,7 +340,6 @@
             this.Name = "formCreateOrder";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Create order";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.formCreateOrder_FormClosed);
             this.Load += new System.EventHandler(this.formCreateOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).EndInit();
             this.groupBox1.ResumeLayout(false);

@@ -14,14 +14,12 @@ namespace CNPM_Project
     public partial class formCreateOrder : Form
     {
         DataTable dtb;
-        formMain main;
         SqlConnection con;
         SqlDataAdapter adapter;
         SqlCommand command;
-        public formCreateOrder(formMain main)
+        public formCreateOrder()
         {
             InitializeComponent();
-            this.main = main;
         }
         private void formCreateOrder_Load(object sender, EventArgs e)
         {
@@ -203,11 +201,6 @@ namespace CNPM_Project
                     con.Close();
                 }
             }
-        }
-
-        private void formCreateOrder_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            main.refreshOrderList();
         }
 
         private void bUpdateOrderItem_Click(object sender, EventArgs e)

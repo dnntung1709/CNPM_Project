@@ -31,7 +31,7 @@
             this.bChangePassword = new System.Windows.Forms.Button();
             this.dtpBirth = new System.Windows.Forms.DateTimePicker();
             this.tbName = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bUpdateInformation = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -71,14 +71,15 @@
             this.tbName.Size = new System.Drawing.Size(226, 22);
             this.tbName.TabIndex = 2;
             // 
-            // button1
+            // bUpdateInformation
             // 
-            this.button1.Location = new System.Drawing.Point(353, 162);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(147, 52);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Update Information";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bUpdateInformation.Location = new System.Drawing.Point(353, 162);
+            this.bUpdateInformation.Name = "bUpdateInformation";
+            this.bUpdateInformation.Size = new System.Drawing.Size(147, 52);
+            this.bUpdateInformation.TabIndex = 0;
+            this.bUpdateInformation.Text = "Update Information";
+            this.bUpdateInformation.UseVisualStyleBackColor = true;
+            this.bUpdateInformation.Click += new System.EventHandler(this.bUpdateInformation_Click);
             // 
             // label1
             // 
@@ -213,8 +214,9 @@
             this.Controls.Add(this.tbUsername);
             this.Controls.Add(this.tbName);
             this.Controls.Add(this.dtpBirth);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.bUpdateInformation);
             this.Controls.Add(this.bChangePassword);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "formAccount";
@@ -230,7 +232,7 @@
         private System.Windows.Forms.Button bChangePassword;
         private System.Windows.Forms.DateTimePicker dtpBirth;
         private System.Windows.Forms.TextBox tbName;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bUpdateInformation;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

@@ -13,17 +13,15 @@ namespace CNPM_Project
 {
     public partial class formChangePassword : Form
     {
-        formAccount account;
         string username;
         SqlConnection con;
         SqlDataAdapter adapter;
         SqlCommand command;
         DataTable dtb;
-        public formChangePassword(string username,formAccount account)
+        public formChangePassword(string username)
         {
             InitializeComponent();
             this.username = username;
-            this.account = account;
         }
 
         private void bCancel_Click(object sender, EventArgs e)

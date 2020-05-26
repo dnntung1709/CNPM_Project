@@ -14,14 +14,12 @@ namespace CNPM_Project
 
     public partial class formReport : Form
     {
-        formMain main;
         SqlConnection con;
         SqlDataAdapter adapter;
         DataTable dtb;
-        public formReport(formMain main)
+        public formReport()
         {
             InitializeComponent();
-            this.main = main;
             con = new SqlConnection(@"Data Source=DESKTOP-BNGI722;Initial Catalog=CNPM_Project;Integrated Security=True");
         }
 
