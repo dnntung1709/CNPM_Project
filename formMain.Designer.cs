@@ -204,7 +204,7 @@
             this.bClearOrder.TabIndex = 5;
             this.bClearOrder.Text = "Clear selection";
             this.bClearOrder.UseVisualStyleBackColor = true;
-            this.bClearOrder.Click += new System.EventHandler(this.bClear_Click);
+            this.bClearOrder.Click += new System.EventHandler(this.bClearOrder_Click);
             // 
             // label3
             // 
@@ -664,6 +664,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.formMain_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.formMain_FormClosed);
             this.Load += new System.EventHandler(this.formMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.orderList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).EndInit();

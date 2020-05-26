@@ -12,3 +12,17 @@ G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug
 G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formChangePassword.resources
 G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formCreateOrder.resources
 G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formReport.resources
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\bin\Debug\CNPM_Project.exe.config
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\bin\Debug\CNPM_Project.exe
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\bin\Debug\CNPM_Project.pdb
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.csprojAssemblyReference.cache
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.formChangePassword.resources
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.formCreateOrder.resources
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.formLogin.resources
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.formMain.resources
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.formReport.resources
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.Properties.Resources.resources
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.csproj.GenerateResource.cache
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.csproj.CoreCompileInputs.cache
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.exe
+G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.pdb

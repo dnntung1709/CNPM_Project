@@ -14,6 +14,8 @@ namespace CNPM_Project
 {
     public partial class formLogin : Form
     {
+        formMain main;
+
         SqlConnection con;
         SqlDataAdapter adapter;
         DataTable dtb;
@@ -29,74 +31,70 @@ namespace CNPM_Project
 
         private void bLogin_Click(object sender, EventArgs e)
         {
+            string query;
+
             con.Open();
-            string query = "select * from _ShopUser where username='"+tbUsername.Text+"' and password='"+tbPassword.Text+"'";
+
+            query= "select * from _ShopUser where username='"+tbUsername.Text+"' and password='"+tbPassword.Text+"'";
             adapter = new SqlDataAdapter(query,con);
             dtb = new DataTable();
-
             adapter.Fill(dtb);
 
             if (dtb.Rows.Count > 0)
             {
-                formMain obj;
                 query = "select * from _ShopOwner where username='" + tbUsername.Text + "'";
                 adapter = new SqlDataAdapter(query, con);
                 dtb = new DataTable();
-
                 adapter.Fill(dtb);
+
                 if (dtb.Rows.Count > 0)
                 {
-                     obj = new formMain(tbUsername.Text,"ShopOwner", this);
+                    main = new formMain(tbUsername.Text,"ShopOwner", this);
+
                     con.Close();
 
                     this.Hide();
-
-                    obj.Show();
+                    main.ShowDialog();
                 }
                 else
                 {
                     query = "select * from _Manager where username='" + tbUsername.Text + "'";
                     adapter = new SqlDataAdapter(query, con);
                     dtb = new DataTable();
-
                     adapter.Fill(dtb);
+
                     if (dtb.Rows.Count > 0)
                     {
-                        obj = new formMain(tbUsername.Text, "Manager", this);
+                        main = new formMain(tbUsername.Text, "Manager", this);
                         con.Close();
 
                         this.Hide();
-
-                        obj.Show();
+                        main.ShowDialog();
                     }
                     else
                     {
                         query = "select * from _Seller where username='" + tbUsername.Text + "'";
                         adapter = new SqlDataAdapter(query, con);
                         dtb = new DataTable();
-
                         adapter.Fill(dtb);
+
                         if (dtb.Rows.Count > 0)
                         {
-                            obj = new formMain(tbUsername.Text, "Seller", this);
+                            main = new formMain(tbUsername.Text, "Seller", this);
                             con.Close();
 
                             this.Hide();
-
-                            obj.Show();
+                            main.ShowDialog();
                         }
                     }
-                }
-                
-                
-                
+                }     
             }
             else
             {
                 MessageBox.Show("Invalid username or password, please retry!");
             }
+
             con.Close();
-            
         }
 
         private void bExit_Click(object sender, EventArgs e)

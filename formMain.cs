@@ -13,12 +13,12 @@ namespace CNPM_Project
 {
     public partial class formMain : Form
     {
-        string role;
         formReport report;
         formLogin login;
         formChangePassword changePassword;
         formCreateOrder createOrder;
 
+        string role;
         string username;
         SqlConnection con;
         SqlCommand command;
@@ -27,9 +27,55 @@ namespace CNPM_Project
         public formMain(string username,string role,formLogin login)
         {
             InitializeComponent();
+
             this.username = username;
             this.role = role;
             this.login = login;
+        }
+        public void firstState_Order()
+        {
+            refreshOrderList();
+            dgvOrderItem.DataSource = null;
+
+            dgvOrder.ClearSelection();
+            dgvOrderItem.ClearSelection();
+
+            bCreateOrder.Enabled = true;
+            bUpdateOrder.Enabled = false;
+            bDeleteOrder.Enabled = false;
+        }
+
+        public void firstState_Product()
+        {
+            refreshProductList();
+
+            dgvProduct.ClearSelection();
+
+            bCreateProduct.Enabled = true;
+            bUpdateProduct.Enabled = false;
+            bDeleteProduct.Enabled = false;
+            bSetStock.Enabled = false;
+
+            tbProductID.Text = "";
+            tbProductName.Text = "";
+            tbProductWarranty.Text = "";
+            tbProductAmount.Text = "";
+            tbProductStock.Text = "";
+        }
+
+        public void firstState_Account()
+        {
+            refreshAccountList();
+
+            dgvAccount.ClearSelection();
+
+            bCreateAccount.Enabled = true;
+            bUpdateAccount.Enabled = false;
+            bDeleteAccount.Enabled = false;
+
+            tbUsername.Text = "";
+            tbPassword.Text = "";
+            cbRole.Text = "Select a role";
         }
         public void refreshOrderList()
         {
@@ -46,7 +92,8 @@ namespace CNPM_Project
         }
         private void formMain_Load(object sender, EventArgs e)
         {
-            MessageBox.Show(role);
+            con = new SqlConnection(@"Data Source=DESKTOP-BNGI722;Initial Catalog=CNPM_Project;Integrated Security=True");
+
             switch (this.role)
             {
                 case "ShopOwner":
@@ -65,37 +112,40 @@ namespace CNPM_Project
                         tControl.TabPages.Remove(tShopOwner);
                         break;
                     }
-
             }
-            con = new SqlConnection(@"Data Source=DESKTOP-BNGI722;Initial Catalog=CNPM_Project;Integrated Security=True");
-            refreshOrderList();
-            refreshProductList();
-            refreshAccountList();
 
-            dgvOrder.ClearSelection();
-            dgvOrderItem.ClearSelection();
-            dgvProduct.ClearSelection();
-            dgvAccount.ClearSelection();
-
-            bCreateOrder.Enabled = true;
-            bClearOrder.Enabled = true;
-            bDeleteOrder.Enabled = false;
-            bUpdateOrder.Enabled = false;
-
-            bUpdateProduct.Enabled = false;
-            bDeleteProduct.Enabled = false;
-            bCreateProduct.Enabled = true;
-            bSetStock.Enabled = false;
+            firstState_Order();
+            firstState_Product();
+            firstState_Account();
 
             cbRole.Items.Add("ShopOwner");
             cbRole.Items.Add("Manager");
             cbRole.Items.Add("Seller");
 
-            bCreateAccount.Enabled = true;
-            bDeleteAccount.Enabled = false;
-            bUpdateAccount.Enabled = false;
+            userWelcome();
         }
-        
+        private void userWelcome()
+        {
+            string query;
+
+            con.Open();
+
+            query= "select name from _ShopUser where username='"+username+"'";
+            adapter = new SqlDataAdapter(query, con);
+            dtb = new DataTable();
+            adapter.Fill(dtb);
+
+            string name = dtb.Rows[0][0].ToString();
+
+            if (name == "New User")
+            {
+                MessageBox.Show("New user, please fill your account information by click on 'Account' and follow the instruction!","Announcement");
+            }
+
+            lbHelloUser.Text = "Welcome "+name;
+
+            con.Close();
+        }
 
         private void bLogout_Click(object sender, EventArgs e)
         {
@@ -104,26 +154,26 @@ namespace CNPM_Project
 
         private void bChangePassword_Click(object sender, EventArgs e)
         {
-                changePassword = new formChangePassword(username, this);
+            changePassword = new formChangePassword(username, this);
 
-                changePassword.Show();
+            changePassword.ShowDialog();
         }
 
         private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            con.Open();
-
             int i = dgvOrder.SelectedCells[0].RowIndex;
+            string query;
+
+            con.Open();
 
             bUpdateOrder.Enabled = true;
             bDeleteOrder.Enabled = true;
             bCreateOrder.Enabled = false;
 
-            string query = "select * from _OrderItem where order_ID=" + dgvOrder.Rows[i].Cells[0].Value.ToString();
+            query = "select * from _OrderItem where order_ID=" + dgvOrder.Rows[i].Cells[0].Value.ToString();
             dtb = new DataTable();
             adapter = new SqlDataAdapter(query, con);
             adapter.Fill(dtb);
-
             dgvOrderItem.DataSource = dtb;
 
             con.Close();
@@ -135,63 +185,40 @@ namespace CNPM_Project
             {
                 e.Cancel = true;
             }
-            else
-            {
-                login.Show();
-                if (changePassword != null)
-                {
-                    changePassword.Close();
-                } 
-                if (createOrder!= null)
-                {
-                    createOrder.Close();
-                }
-                if (report != null)
-                {
-                    report.Close();
-                } 
-            }
+        }
+        private void formMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            login.Show();
         }
 
         private void bCreateOrder_Click(object sender, EventArgs e)
         {
-                createOrder = new formCreateOrder(this);
+            createOrder = new formCreateOrder(this);
 
-                createOrder.Show();
+            createOrder.ShowDialog();
         }
         
         private void bDeleteOrder_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Do you want to delete this order and its items?\nIt can't be restore once it's deleted","Confirm",MessageBoxButtons.YesNo, MessageBoxIcon.Information) ==DialogResult.Yes)
             {
+                int i = dgvOrder.SelectedCells[0].RowIndex;
+                int order_ID = int.Parse(dgvOrder.Rows[i].Cells[0].Value.ToString());
+                string query;
+
                 con.Open();
 
-                int i = dgvOrder.SelectedCells[0].RowIndex;
-
-                int order_ID = int.Parse(dgvOrder.Rows[i].Cells[0].Value.ToString());
-                string query = "delete from _OrderItem where order_ID=" + order_ID;
+                query = "delete from _OrderItem where order_ID=" + order_ID;
                 command = new SqlCommand(query, con);
-
                 command.ExecuteNonQuery();
 
                 query = "delete from _Order where order_ID=" + order_ID;
                 command = new SqlCommand(query, con);
-
                 command.ExecuteNonQuery();
 
                 con.Close();
 
-                refreshOrderList();
-
-                dtb = new DataTable();
-                dgvOrderItem.DataSource = dtb;
-
-                dgvOrder.ClearSelection();
-                dgvOrderItem.ClearSelection();
-
-                bCreateOrder.Enabled = true;
-                bDeleteOrder.Enabled = false;
-                bUpdateOrder.Enabled = false;
+                firstState_Order();
             }
         }
 
@@ -200,58 +227,42 @@ namespace CNPM_Project
 
         }
 
-        private void bClear_Click(object sender, EventArgs e)
+        private void bClearOrder_Click(object sender, EventArgs e)
         {
-            dtb = new DataTable();
-            dgvOrderItem.DataSource = dtb;
-
-            dgvOrder.ClearSelection();
-            dgvOrderItem.ClearSelection();
-
-            bCreateOrder.Enabled = true;
-            bDeleteOrder.Enabled = false;
-            bUpdateOrder.Enabled = false;
+            firstState_Order();
         }
         public void refreshProductList()
         {
+            string query;
             con.Open();
 
-            string query = "select * from _Product";
+            query = "select * from _Product";
             adapter = new SqlDataAdapter(query, con);
             dtb = new DataTable();
             adapter.Fill(dtb);
-
             dgvProduct.DataSource = dtb;
 
             con.Close();
         }
         private void bCreateProduct_Click(object sender, EventArgs e)
         {
+            string query;
+
             if (tbProductID.Text!="" & tbProductName.Text!="" & tbProductWarranty.Text != "" & tbProductAmount.Text!="")
             {
                 try
                 {
                     con.Open();
 
-                    string query = "insert into _Product(product_ID, product_name,product_warranty,amount, product_quantity)";
+                    query = "insert into _Product(product_ID, product_name,product_warranty,amount, product_quantity)";
                     query += " values('" + tbProductID.Text + "','" + tbProductName.Text + "'," + tbProductWarranty.Text + "," + tbProductAmount.Text + "," + "0" + ")";
-
                     command = new SqlCommand(query, con);
                     command.ExecuteNonQuery();
 
                     con.Close();
 
                     MessageBox.Show("The product has been created successfully!", "Result");
-
-                    refreshProductList();
-
-                    dgvProduct.ClearSelection();
-
-                    tbProductID.Text = "";
-                    tbProductName.Text = "";
-                    tbProductWarranty.Text = "";
-                    tbProductStock.Text = "";
-                    tbProductAmount.Text = "";
+                    firstState_Product();
                 }
                 catch
                 {
@@ -282,58 +293,37 @@ namespace CNPM_Project
 
         private void bClearProduct_Click(object sender, EventArgs e)
         {
-            dgvProduct.ClearSelection();
-
-            tbProductID.Text = "";
-            tbProductName.Text = "";
-            tbProductWarranty.Text = "";
-            tbProductStock.Text = "";
-            tbProductAmount.Text = "";
-
-            bCreateProduct.Enabled = true;
-            bDeleteProduct.Enabled = false;
-            bUpdateProduct.Enabled = false;
-            bSetStock.Enabled = false;
+            firstState_Product();
         }
 
         private void bSetStock_Click(object sender, EventArgs e)
         {
+            string query;
+            int i = dgvProduct.SelectedCells[0].RowIndex;
+            string product_ID = dgvProduct.Rows[i].Cells[0].Value.ToString();
+
             if (tbProductStock.Text != "")
             {
-                int i = dgvProduct.SelectedCells[0].RowIndex;
-                string product_ID = dgvProduct.Rows[i].Cells[0].Value.ToString();
-
-                try
+                if (MessageBox.Show("Do you want to change the product's quantity in stock?","Confirm",MessageBoxButtons.YesNo,MessageBoxIcon.Information)==DialogResult.Yes)
                 {
-                    con.Open();
+                    try
+                    {
+                        con.Open();
 
-                    string query="update _Product set product_quantity="+tbProductStock.Text+" where product_ID='"+product_ID+"'";
-                    command = new SqlCommand(query, con);
+                        query = "update _Product set product_quantity=" + tbProductStock.Text + " where product_ID='" + product_ID + "'";
+                        command = new SqlCommand(query, con);
+                        command.ExecuteNonQuery();
 
-                    command.ExecuteNonQuery();
+                        con.Close();
 
-                    MessageBox.Show("The product has been set successfully!", "Result");
+                        MessageBox.Show("The product has been set successfully!", "Result");
 
-                    con.Close();
-
-                    refreshProductList();
-
-                    dgvProduct.ClearSelection();
-
-                    tbProductID.Text = "";
-                    tbProductName.Text = "";
-                    tbProductWarranty.Text = "";
-                    tbProductStock.Text = "";
-                    tbProductAmount.Text = "";
-
-                    bCreateProduct.Enabled = true;
-                    bDeleteProduct.Enabled = false;
-                    bUpdateProduct.Enabled = false;
-                    bSetStock.Enabled = false;
-                }
-                catch
-                {
-                    MessageBox.Show("Invalid input, please retry!", "Error");
+                        firstState_Product();
+                    }
+                    catch
+                    {
+                        MessageBox.Show("Invalid input, please retry!", "Error");
+                    }
                 }
             }
             else
@@ -344,36 +334,36 @@ namespace CNPM_Project
 
         private void bDeleteProduct_Click(object sender, EventArgs e)
         {
-            con.Open();
-
             int i = dgvProduct.SelectedCells[0].RowIndex;
             string product_ID = dgvProduct.Rows[i].Cells[0].Value.ToString();
+            string query;
 
-            string query = "delete from _Product where product_ID='"+product_ID+"'";
+            con.Open();
+
+            query = "delete from _Product where product_ID='" + product_ID + "'";
             command = new SqlCommand(query, con);
-
             command.ExecuteNonQuery();
-
-            MessageBox.Show("The product has been deleted successfully!", "Result");
 
             con.Close();
 
-            refreshProductList();
+            MessageBox.Show("The product has been deleted successfully!", "Result");
+
+            firstState_Product();
         }
 
         private void bUpdateProduct_Click(object sender, EventArgs e)
         {
+            int i = dgvProduct.SelectedCells[0].RowIndex;
+            string product_ID = dgvProduct.Rows[i].Cells[0].Value.ToString();
+            string query;
+
             if (tbProductID.Text != "" & tbProductName.Text != "" & tbProductWarranty.Text != "" & tbProductAmount.Text != "")
             {
                 try
                 {
                     con.Open();
 
-                    int i = dgvProduct.SelectedCells[0].RowIndex;
-                    string product_ID = dgvProduct.Rows[i].Cells[0].Value.ToString();
-
-                    string query = "update _Product set product_ID='"+tbProductID.Text+"', product_name='"+tbProductName.Text+"',product_warranty="+tbProductWarranty.Text+",amount="+tbProductAmount.Text+" where product_ID='"+product_ID+"'";
-
+                    query = "update _Product set product_ID='" + tbProductID.Text + "', product_name='" + tbProductName.Text + "',product_warranty=" + tbProductWarranty.Text + ",amount=" + tbProductAmount.Text + " where product_ID='" + product_ID + "'";
                     command = new SqlCommand(query, con);
                     command.ExecuteNonQuery();
 
@@ -381,13 +371,12 @@ namespace CNPM_Project
 
                     MessageBox.Show("The product has been updated successfully!", "Result");
 
-                    refreshProductList();
+                    firstState_Product();
                 }
                 catch
                 {
                     MessageBox.Show("Update failed! The product id had already existed", "Error");
                 }
-
             }
             else
             {
@@ -409,19 +398,13 @@ namespace CNPM_Project
         }
         private void bClearAccount_Click(object sender, EventArgs e)
         {
-            dgvProduct.ClearSelection();
-
-            tbUsername.Text = "";
-            tbPassword.Text = "";
-            cbRole.Text = "";
-
-            bCreateAccount.Enabled = true;
-            bDeleteAccount.Enabled = false;
-            bUpdateAccount.Enabled = false;
+            firstState_Account();
         }
 
         private void bCreateAccount_Click(object sender, EventArgs e)
         {
+            string query;
+
             if (tbUsername.Text!= "" & tbPassword.Text != "" & cbRole.SelectedItem.ToString()!="")
             {
                 if (tbUsername.Text.Length<=10 & tbPassword.Text.Length <= 20)
@@ -430,15 +413,13 @@ namespace CNPM_Project
                     {
                         con.Open();
 
-                        string query = "insert into _ShopUser(username, password)";
-                        query += " values('" + tbUsername.Text + "','" + tbPassword.Text + "')";
-
+                        query= "insert into _ShopUser(username, password, name)";
+                        query += " values('" + tbUsername.Text + "','" + tbPassword.Text + "','"+"New User"+"')";
                         command = new SqlCommand(query, con);
                         command.ExecuteNonQuery();
 
                         query = "insert into _" + cbRole.SelectedItem.ToString() + "(username)";
                         query += " values('" + tbUsername.Text + "')";
-
                         command = new SqlCommand(query, con);
                         command.ExecuteNonQuery();
 
@@ -446,14 +427,7 @@ namespace CNPM_Project
 
                         MessageBox.Show("The account has been created successfully!", "Result");
 
-                        refreshAccountList();
-
-                        dgvAccount.ClearSelection();
-
-                        tbUsername.Text = "";
-                        tbPassword.Text = "";
-                        cbRole.Text = "";
-
+                        firstState_Account();
                     }
                     catch
                     {
@@ -463,7 +437,6 @@ namespace CNPM_Project
                 else
                 {
                     MessageBox.Show("Invalid information!\nPlease retry!", "Error");
-
                 }
             }
             else
@@ -474,13 +447,14 @@ namespace CNPM_Project
 
         private void bUpdateAccount_Click(object sender, EventArgs e)
         {
+            int i = dgvAccount.SelectedCells[0].RowIndex;
+            string username = dgvAccount.Rows[i].Cells[0].Value.ToString();
+            string query;
+
             if (tbUsername.Text != "" & tbPassword.Text != "" & cbRole.SelectedItem.ToString() != "")
             {
                 if (tbUsername.Text.Length <= 10 & tbPassword.Text.Length <= 20)
                 {
-                    int i = dgvAccount.SelectedCells[0].RowIndex;
-                    string username = dgvAccount.Rows[i].Cells[0].Value.ToString();
-                    string query;
                     try
                     {
                         con.Open();
@@ -489,19 +463,16 @@ namespace CNPM_Project
                         {
                             query = "delete from _" + cbRole.Items[j].ToString() + " where username='" + username + "'";
                             command = new SqlCommand(query, con);
-
                             command.ExecuteNonQuery();
                         }
 
                         query = "update _ShopUser";
                         query += " set username='" + tbUsername.Text + "', password='" + tbPassword.Text + "' where username='" + username + "'";
-
                         command = new SqlCommand(query, con);
                         command.ExecuteNonQuery();
 
                         query = "insert into _" + cbRole.SelectedItem.ToString() + "(username)";
                         query += " values('" + tbUsername.Text + "')";
-
                         command = new SqlCommand(query, con);
                         command.ExecuteNonQuery();
 
@@ -509,17 +480,7 @@ namespace CNPM_Project
 
                         MessageBox.Show("The account has been updated successfully!", "Result");
 
-                        refreshAccountList();
-
-                        dgvAccount.ClearSelection();
-
-                        tbUsername.Text = "";
-                        tbPassword.Text = "";
-                        cbRole.Text = "";
-
-                        bCreateAccount.Enabled = true;
-                        bDeleteAccount.Enabled = false;
-                        bUpdateAccount.Enabled = false;
+                        firstState_Account();
                     }
                     catch
                     {
@@ -529,7 +490,6 @@ namespace CNPM_Project
                 else
                 {
                     MessageBox.Show("Invalid information!\nPlease retry!", "Error");
-
                 }
             }
             else
@@ -540,45 +500,42 @@ namespace CNPM_Project
 
         private void bDeleteAccount_Click(object sender, EventArgs e)
         {
-            con.Open();
-
             int i = dgvAccount.SelectedCells[0].RowIndex;
             string username = dgvAccount.Rows[i].Cells[0].Value.ToString();
+            string query;
 
-            string query = "delete from _" + cbRole.Text + " where username='" + username + "'";
+            con.Open();
+
+            query = "delete from _" + cbRole.Text + " where username='" + username + "'";
             command = new SqlCommand(query, con);
-
             command.ExecuteNonQuery();
             
-
             query = "delete from _ShopUser where username='" + username + "'";
             command = new SqlCommand(query, con);
-
             command.ExecuteNonQuery();
-
-            MessageBox.Show("The account has been deleted successfully!", "Result");
 
             con.Close();
 
-            refreshAccountList();
+            MessageBox.Show("The account has been deleted successfully!", "Result");
+
+            firstState_Account();
         }
 
         private void dgvAccount_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int i = dgvAccount.SelectedCells[0].RowIndex;
+            string query;
 
             con.Open();
 
             tbUsername.Text = dgvAccount.Rows[i].Cells[0].Value.ToString();
             tbPassword.Text = dgvAccount.Rows[i].Cells[1].Value.ToString();
 
-            string query;
             for (int j = 0; j < cbRole.Items.Count; j++)
             {
                 query = "select * from _" + cbRole.Items[j].ToString() + " where username='" + tbUsername.Text + "'";
                 adapter = new SqlDataAdapter(query, con);
                 dtb = new DataTable();
-
                 adapter.Fill(dtb);
                     
                 if (dtb.Rows.Count > 0)
@@ -595,10 +552,9 @@ namespace CNPM_Project
 
         private void bReport_Click(object sender, EventArgs e)
         {
-                report = new formReport(this);
+            report = new formReport(this);
 
-                report.Show();
-            
+            report.ShowDialog();
         }
     }
 }
