@@ -84,6 +84,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
+            this.bAccount = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.orderList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.orderBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -178,7 +179,7 @@
             // 
             // bChangePassword
             // 
-            this.bChangePassword.Location = new System.Drawing.Point(806, 180);
+            this.bChangePassword.Location = new System.Drawing.Point(828, 124);
             this.bChangePassword.Name = "bChangePassword";
             this.bChangePassword.Size = new System.Drawing.Size(146, 32);
             this.bChangePassword.TabIndex = 4;
@@ -220,7 +221,7 @@
             // lbHelloUser
             // 
             this.lbHelloUser.AutoSize = true;
-            this.lbHelloUser.Location = new System.Drawing.Point(500, 186);
+            this.lbHelloUser.Location = new System.Drawing.Point(559, 186);
             this.lbHelloUser.MaximumSize = new System.Drawing.Size(200, 0);
             this.lbHelloUser.MinimumSize = new System.Drawing.Size(300, 21);
             this.lbHelloUser.Name = "lbHelloUser";
@@ -234,7 +235,7 @@
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1008, 134);
+            this.pictureBox1.Size = new System.Drawing.Size(1021, 134);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
@@ -646,11 +647,22 @@
             this.tbUsername.Size = new System.Drawing.Size(250, 22);
             this.tbUsername.TabIndex = 1;
             // 
+            // bAccount
+            // 
+            this.bAccount.Location = new System.Drawing.Point(865, 180);
+            this.bAccount.Name = "bAccount";
+            this.bAccount.Size = new System.Drawing.Size(87, 32);
+            this.bAccount.TabIndex = 12;
+            this.bAccount.Text = "Account";
+            this.bAccount.UseVisualStyleBackColor = true;
+            this.bAccount.Click += new System.EventHandler(this.bAccount_Click);
+            // 
             // formMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1047, 620);
+            this.Controls.Add(this.bAccount);
             this.Controls.Add(this.bLogout);
             this.Controls.Add(this.bChangePassword);
             this.Controls.Add(this.pictureBox1);
@@ -748,5 +760,6 @@
         private System.Windows.Forms.Button bClearAccount;
         private System.Windows.Forms.Button bDeleteAccount;
         private System.Windows.Forms.Button bUpdateAccount;
+        private System.Windows.Forms.Button bAccount;
     }
 }

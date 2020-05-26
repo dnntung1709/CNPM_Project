@@ -13,6 +13,7 @@ namespace CNPM_Project
 {
     public partial class formMain : Form
     {
+        formAccount account;
         formReport report;
         formLogin login;
         formChangePassword changePassword;
@@ -555,6 +556,13 @@ namespace CNPM_Project
             report = new formReport(this);
 
             report.ShowDialog();
+        }
+
+        private void bAccount_Click(object sender, EventArgs e)
+        {
+            account = new formAccount(this);
+
+            account.ShowDialog();
         }
     }
 }
