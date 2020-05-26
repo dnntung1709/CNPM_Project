@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lbTotalRevenue = new System.Windows.Forms.Label();
-            this.lbOrderAmount = new System.Windows.Forms.Label();
             this.lbTotalSoldProducts = new System.Windows.Forms.Label();
+            this.lbOrderAmount = new System.Windows.Forms.Label();
+            this.lbTotalRevenue = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,32 +53,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Revenue";
             // 
-            // label1
+            // lbTotalSoldProducts
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 89);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(96, 17);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Order amount";
+            this.lbTotalSoldProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTotalSoldProducts.Location = new System.Drawing.Point(204, 116);
+            this.lbTotalSoldProducts.Name = "lbTotalSoldProducts";
+            this.lbTotalSoldProducts.Size = new System.Drawing.Size(143, 43);
+            this.lbTotalSoldProducts.TabIndex = 1;
+            this.lbTotalSoldProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label2
+            // lbOrderAmount
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(96, 17);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Total revenue";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(201, 89);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(129, 17);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Total sold products";
+            this.lbOrderAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbOrderAmount.Location = new System.Drawing.Point(9, 116);
+            this.lbOrderAmount.Name = "lbOrderAmount";
+            this.lbOrderAmount.Size = new System.Drawing.Size(126, 43);
+            this.lbOrderAmount.TabIndex = 1;
+            this.lbOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lbTotalRevenue
             // 
@@ -90,23 +81,32 @@
             this.lbTotalRevenue.TabIndex = 1;
             this.lbTotalRevenue.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lbOrderAmount
+            // label3
             // 
-            this.lbOrderAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbOrderAmount.Location = new System.Drawing.Point(9, 116);
-            this.lbOrderAmount.Name = "lbOrderAmount";
-            this.lbOrderAmount.Size = new System.Drawing.Size(126, 43);
-            this.lbOrderAmount.TabIndex = 1;
-            this.lbOrderAmount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(201, 89);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(129, 17);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Total sold products";
             // 
-            // lbTotalSoldProducts
+            // label2
             // 
-            this.lbTotalSoldProducts.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTotalSoldProducts.Location = new System.Drawing.Point(204, 116);
-            this.lbTotalSoldProducts.Name = "lbTotalSoldProducts";
-            this.lbTotalSoldProducts.Size = new System.Drawing.Size(143, 43);
-            this.lbTotalSoldProducts.TabIndex = 1;
-            this.lbTotalSoldProducts.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(96, 17);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Total revenue";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 89);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(96, 17);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Order amount";
             // 
             // formReport
             // 
@@ -114,6 +114,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(377, 251);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "formReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Report";

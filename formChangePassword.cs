@@ -70,15 +70,5 @@ namespace CNPM_Project
                 MessageBox.Show("Invalid input! Please retry!");
             }
         }
-
-        private void formChangePassword_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            main.refreshOrderList();
-        }
-
-        private void formChangePassword_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            this.Close();
-        }
     }
 }

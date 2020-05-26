@@ -16,11 +16,11 @@ namespace CNPM_Project
         formAccount account;
         formReport report;
         formLogin login;
-        formChangePassword changePassword;
+
         formCreateOrder createOrder;
 
         string role;
-        string username;
+        public string username;
         SqlConnection con;
         SqlCommand command;
         SqlDataAdapter adapter;
@@ -151,13 +151,6 @@ namespace CNPM_Project
         private void bLogout_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void bChangePassword_Click(object sender, EventArgs e)
-        {
-            changePassword = new formChangePassword(username, this);
-
-            changePassword.ShowDialog();
         }
 
         private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -26,3 +26,4 @@ G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\
 G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.csproj.CoreCompileInputs.cache
 G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.exe
 G:\My Drive\Project\Công nghệ phần mềm (source)\Source code\CNPM_Project\obj\Debug\CNPM_Project.pdb
+G:\My Drive\Project\Công nghệ phần mềm\Source code\CNPM_Project\obj\Debug\CNPM_Project.formAccount.resources

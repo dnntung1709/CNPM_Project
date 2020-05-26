@@ -27,5 +27,11 @@ namespace CNPM_Project
 
             changePassword.ShowDialog();
         }
+
+        private void formAccount_Load(object sender, EventArgs e)
+        {
+            tbUsername.Text = main.username;
+            tbUsername.Enabled = false;
+        }
     }
 }

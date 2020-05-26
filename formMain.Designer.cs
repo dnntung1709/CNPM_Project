@@ -38,7 +38,6 @@
             this.bLogout = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvOrderItem = new System.Windows.Forms.DataGridView();
-            this.bChangePassword = new System.Windows.Forms.Button();
             this.bUpdateOrder = new System.Windows.Forms.Button();
             this.bClearOrder = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -176,16 +175,6 @@
             this.dgvOrderItem.RowTemplate.Height = 24;
             this.dgvOrderItem.Size = new System.Drawing.Size(281, 204);
             this.dgvOrderItem.TabIndex = 0;
-            // 
-            // bChangePassword
-            // 
-            this.bChangePassword.Location = new System.Drawing.Point(828, 124);
-            this.bChangePassword.Name = "bChangePassword";
-            this.bChangePassword.Size = new System.Drawing.Size(146, 32);
-            this.bChangePassword.TabIndex = 4;
-            this.bChangePassword.Text = "Change password";
-            this.bChangePassword.UseVisualStyleBackColor = true;
-            this.bChangePassword.Click += new System.EventHandler(this.bChangePassword_Click);
             // 
             // bUpdateOrder
             // 
@@ -664,7 +653,6 @@
             this.ClientSize = new System.Drawing.Size(1047, 620);
             this.Controls.Add(this.bAccount);
             this.Controls.Add(this.bLogout);
-            this.Controls.Add(this.bChangePassword);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lbHelloUser);
             this.Controls.Add(this.label3);
@@ -713,7 +701,6 @@
         private System.Windows.Forms.DataGridView dgvOrder;
         private System.Windows.Forms.Button bLogout;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button bChangePassword;
         private System.Windows.Forms.DataGridView dgvOrderItem;
         private System.Windows.Forms.Button bUpdateOrder;
         private System.Windows.Forms.Button bClearOrder;

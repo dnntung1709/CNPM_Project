@@ -219,6 +219,7 @@
             this.MinimizeBox = false;
             this.Name = "formAccount";
             this.Text = "Account";
+            this.Load += new System.EventHandler(this.formAccount_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
