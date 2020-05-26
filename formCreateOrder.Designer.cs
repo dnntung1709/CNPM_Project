@@ -35,6 +35,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.dgvItemList = new System.Windows.Forms.DataGridView();
+            this.product_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbProductID = new System.Windows.Forms.Label();
             this.lbQuantity = new System.Windows.Forms.Label();
             this.tbQuantity = new System.Windows.Forms.TextBox();
@@ -43,18 +47,14 @@
             this.tbProductName = new System.Windows.Forms.TextBox();
             this.lbProductName = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.bCreateOrder = new System.Windows.Forms.Button();
-            this.bCancelOrder = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lbTotalAmount = new System.Windows.Forms.Label();
-            this.product_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.product_name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bClear = new System.Windows.Forms.Button();
             this.bDeleteOrderItem = new System.Windows.Forms.Button();
             this.bCreateOrderItem = new System.Windows.Forms.Button();
-            this.bClear = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.bCreateOrder = new System.Windows.Forms.Button();
+            this.bCancel = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbTotalAmount = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvItemList)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -110,6 +110,8 @@
             // 
             // dgvItemList
             // 
+            this.dgvItemList.AllowUserToAddRows = false;
+            this.dgvItemList.AllowUserToDeleteRows = false;
             this.dgvItemList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvItemList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.product_ID,
@@ -124,6 +126,38 @@
             this.dgvItemList.Size = new System.Drawing.Size(482, 147);
             this.dgvItemList.TabIndex = 2;
             this.dgvItemList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItemList_CellClick);
+            // 
+            // product_ID
+            // 
+            this.product_ID.HeaderText = "Product ID";
+            this.product_ID.MinimumWidth = 6;
+            this.product_ID.Name = "product_ID";
+            this.product_ID.ReadOnly = true;
+            this.product_ID.Width = 125;
+            // 
+            // product_name
+            // 
+            this.product_name.HeaderText = "Product name";
+            this.product_name.MinimumWidth = 6;
+            this.product_name.Name = "product_name";
+            this.product_name.ReadOnly = true;
+            this.product_name.Width = 125;
+            // 
+            // quantity
+            // 
+            this.quantity.HeaderText = "Quantity";
+            this.quantity.MinimumWidth = 6;
+            this.quantity.Name = "quantity";
+            this.quantity.ReadOnly = true;
+            this.quantity.Width = 125;
+            // 
+            // amount
+            // 
+            this.amount.HeaderText = "Amount";
+            this.amount.MinimumWidth = 6;
+            this.amount.Name = "amount";
+            this.amount.ReadOnly = true;
+            this.amount.Width = 125;
             // 
             // lbProductID
             // 
@@ -205,6 +239,36 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Order Item";
             // 
+            // bClear
+            // 
+            this.bClear.Location = new System.Drawing.Point(494, 187);
+            this.bClear.Name = "bClear";
+            this.bClear.Size = new System.Drawing.Size(143, 44);
+            this.bClear.TabIndex = 4;
+            this.bClear.Text = "Clear selection";
+            this.bClear.UseVisualStyleBackColor = true;
+            this.bClear.Click += new System.EventHandler(this.bClearOrderItem_Click);
+            // 
+            // bDeleteOrderItem
+            // 
+            this.bDeleteOrderItem.Location = new System.Drawing.Point(494, 137);
+            this.bDeleteOrderItem.Name = "bDeleteOrderItem";
+            this.bDeleteOrderItem.Size = new System.Drawing.Size(143, 44);
+            this.bDeleteOrderItem.TabIndex = 4;
+            this.bDeleteOrderItem.Text = "Delete item from the order";
+            this.bDeleteOrderItem.UseVisualStyleBackColor = true;
+            this.bDeleteOrderItem.Click += new System.EventHandler(this.bDeleteOrderItem_Click);
+            // 
+            // bCreateOrderItem
+            // 
+            this.bCreateOrderItem.Location = new System.Drawing.Point(494, 29);
+            this.bCreateOrderItem.Name = "bCreateOrderItem";
+            this.bCreateOrderItem.Size = new System.Drawing.Size(143, 51);
+            this.bCreateOrderItem.TabIndex = 4;
+            this.bCreateOrderItem.Text = "Add item to the order";
+            this.bCreateOrderItem.UseVisualStyleBackColor = true;
+            this.bCreateOrderItem.Click += new System.EventHandler(this.bCreateOrderItem_Click);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label3);
@@ -230,15 +294,15 @@
             this.bCreateOrder.UseVisualStyleBackColor = true;
             this.bCreateOrder.Click += new System.EventHandler(this.bCreateOrder_Click);
             // 
-            // bCancelOrder
+            // bCancel
             // 
-            this.bCancelOrder.Location = new System.Drawing.Point(506, 85);
-            this.bCancelOrder.Name = "bCancelOrder";
-            this.bCancelOrder.Size = new System.Drawing.Size(143, 39);
-            this.bCancelOrder.TabIndex = 7;
-            this.bCancelOrder.Text = "Cancel";
-            this.bCancelOrder.UseVisualStyleBackColor = true;
-            this.bCancelOrder.Click += new System.EventHandler(this.bCancelOrder_Click);
+            this.bCancel.Location = new System.Drawing.Point(506, 85);
+            this.bCancel.Name = "bCancel";
+            this.bCancel.Size = new System.Drawing.Size(143, 39);
+            this.bCancel.TabIndex = 7;
+            this.bCancel.Text = "Cancel";
+            this.bCancel.UseVisualStyleBackColor = true;
+            this.bCancel.Click += new System.EventHandler(this.bCancel_Click);
             // 
             // label4
             // 
@@ -261,68 +325,6 @@
             this.lbTotalAmount.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.lbTotalAmount.UseMnemonic = false;
             // 
-            // product_ID
-            // 
-            this.product_ID.HeaderText = "Product ID";
-            this.product_ID.MinimumWidth = 6;
-            this.product_ID.Name = "product_ID";
-            this.product_ID.ReadOnly = true;
-            this.product_ID.Width = 125;
-            // 
-            // product_name
-            // 
-            this.product_name.HeaderText = "Product name";
-            this.product_name.MinimumWidth = 6;
-            this.product_name.Name = "product_name";
-            this.product_name.ReadOnly = true;
-            this.product_name.Width = 125;
-            // 
-            // quantity
-            // 
-            this.quantity.HeaderText = "Quantity";
-            this.quantity.MinimumWidth = 6;
-            this.quantity.Name = "quantity";
-            this.quantity.ReadOnly = true;
-            this.quantity.Width = 125;
-            // 
-            // amount
-            // 
-            this.amount.HeaderText = "Amount";
-            this.amount.MinimumWidth = 6;
-            this.amount.Name = "amount";
-            this.amount.ReadOnly = true;
-            this.amount.Width = 125;
-            // 
-            // bDeleteOrderItem
-            // 
-            this.bDeleteOrderItem.Location = new System.Drawing.Point(494, 137);
-            this.bDeleteOrderItem.Name = "bDeleteOrderItem";
-            this.bDeleteOrderItem.Size = new System.Drawing.Size(143, 44);
-            this.bDeleteOrderItem.TabIndex = 4;
-            this.bDeleteOrderItem.Text = "Delete item from the order";
-            this.bDeleteOrderItem.UseVisualStyleBackColor = true;
-            this.bDeleteOrderItem.Click += new System.EventHandler(this.bDeleteOrderItem_Click);
-            // 
-            // bCreateOrderItem
-            // 
-            this.bCreateOrderItem.Location = new System.Drawing.Point(494, 29);
-            this.bCreateOrderItem.Name = "bCreateOrderItem";
-            this.bCreateOrderItem.Size = new System.Drawing.Size(143, 51);
-            this.bCreateOrderItem.TabIndex = 4;
-            this.bCreateOrderItem.Text = "Add item to the order";
-            this.bCreateOrderItem.UseVisualStyleBackColor = true;
-            this.bCreateOrderItem.Click += new System.EventHandler(this.bCreateOrderItem_Click);
-            // 
-            // bClear
-            // 
-            this.bClear.Location = new System.Drawing.Point(494, 187);
-            this.bClear.Name = "bClear";
-            this.bClear.Size = new System.Drawing.Size(143, 44);
-            this.bClear.TabIndex = 4;
-            this.bClear.Text = "Clear selection";
-            this.bClear.UseVisualStyleBackColor = true;
-            this.bClear.Click += new System.EventHandler(this.bClear_Click);
-            // 
             // formCreateOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -330,7 +332,7 @@
             this.ClientSize = new System.Drawing.Size(667, 448);
             this.Controls.Add(this.lbTotalAmount);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.bCancelOrder);
+            this.Controls.Add(this.bCancel);
             this.Controls.Add(this.bCreateOrder);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -370,7 +372,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button bCreateOrder;
-        private System.Windows.Forms.Button bCancelOrder;
+        private System.Windows.Forms.Button bCancel;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lbTotalAmount;
         private System.Windows.Forms.DataGridViewTextBoxColumn product_ID;

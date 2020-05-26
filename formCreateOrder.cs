@@ -24,12 +24,13 @@ namespace CNPM_Project
         private void formCreateOrder_Load(object sender, EventArgs e)
         {
             con = new SqlConnection(@"Data Source=DESKTOP-BNGI722;Initial Catalog=CNPM_Project;Integrated Security=True");
+            
             bUpdateOrderItem.Enabled = false;
             bDeleteOrderItem.Enabled = false;
             bCreateOrderItem.Enabled = true;
         }
 
-        private void bCancelOrder_Click(object sender, EventArgs e)
+        private void bCancel_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -69,13 +70,22 @@ namespace CNPM_Project
             {
                 if (tbProductName.Text!= "Error! The product cannot be found!" & int.TryParse(tbQuantity.Text, out parsedValue)==true)
                 {
+                    foreach (DataGridViewRow row in dgvItemList.Rows)
+                    {
+                        if (row.Cells[0].Value.ToString() == tbProductID.Text)
+                        {
+                            MessageBox.Show("The product you want to add is already in this list!", "Error");
+                            return;
+                        }
+                    }
+
                     con.Open();
 
                     string query = "select product_name,amount from _Product where product_ID='" + tbProductID.Text + "'";
                     adapter = new SqlDataAdapter(query, con);
                     DataTable dtb = new DataTable();
-
                     adapter.Fill(dtb);
+
                     dgvItemList.Rows.Add(tbProductID.Text,dtb.Rows[0][0].ToString(),tbQuantity.Text,dtb.Rows[0][1].ToString());
 
                     lbTotalAmount.Text= (int.Parse(dtb.Rows[0][1].ToString())*int.Parse(tbQuantity.Text)+int.Parse(lbTotalAmount.Text)).ToString();
@@ -101,29 +111,16 @@ namespace CNPM_Project
         {
             int i = dgvItemList.SelectedCells[0].RowIndex;
 
-            if (dgvItemList.Rows[i].Cells[0].Value != null)
-            {
-                bUpdateOrderItem.Enabled = true;
-                bDeleteOrderItem.Enabled = true;
-                bCreateOrderItem.Enabled = false;
+            bUpdateOrderItem.Enabled = true;
+            bDeleteOrderItem.Enabled = true;
+            bCreateOrderItem.Enabled = false;
 
-                tbProductID.Text = dgvItemList.Rows[i].Cells[0].Value.ToString();
-                tbProductName.Text = dgvItemList.Rows[i].Cells[1].Value.ToString();
-                tbQuantity.Text = dgvItemList.Rows[i].Cells[2].Value.ToString();
-            }
-            else
-            {
-                bUpdateOrderItem.Enabled = false;
-                bDeleteOrderItem.Enabled = false;
-                bCreateOrderItem.Enabled = true;
-
-                tbProductID.Text = "";
-                tbProductName.Text = "";
-                tbQuantity.Text = "";
-            }
+            tbProductID.Text = dgvItemList.Rows[i].Cells[0].Value.ToString();
+            tbProductName.Text = dgvItemList.Rows[i].Cells[1].Value.ToString();
+            tbQuantity.Text = dgvItemList.Rows[i].Cells[2].Value.ToString();
         }
 
-        private void bClear_Click(object sender, EventArgs e)
+        private void bClearOrderItem_Click(object sender, EventArgs e)
         {
             bUpdateOrderItem.Enabled = false;
             bDeleteOrderItem.Enabled = false;
@@ -138,6 +135,7 @@ namespace CNPM_Project
         private void bDeleteOrderItem_Click(object sender, EventArgs e)
         {
             int i = dgvItemList.SelectedCells[0].RowIndex;
+
             dgvItemList.Rows.RemoveAt(i);
 
             bUpdateOrderItem.Enabled = false;
@@ -206,19 +204,22 @@ namespace CNPM_Project
         private void bUpdateOrderItem_Click(object sender, EventArgs e)
         {
             int i = dgvItemList.SelectedCells[0].RowIndex;
+            int parsedValue;
+            int new_total_amount;
+            string query;
+            int old_total_amount=int.Parse(dgvItemList.Rows[i].Cells[3].Value.ToString())* int.Parse(dgvItemList.Rows[i].Cells[2].Value.ToString());
 
-            int parsedValue,new_total_amount,old_total_amount=int.Parse(dgvItemList.Rows[i].Cells[3].Value.ToString())* int.Parse(dgvItemList.Rows[i].Cells[2].Value.ToString());
             if (tbProductID.Text != "" & tbQuantity.Text != "")
             {
                 if (tbProductName.Text != "Error! The product cannot be found!" & int.TryParse(tbQuantity.Text, out parsedValue) == true)
                 {
                     con.Open();
 
-                    string query = "select product_name,amount from _Product where product_ID='" + tbProductID.Text + "'";
+                    query = "select product_name,amount from _Product where product_ID='" + tbProductID.Text + "'";
                     adapter = new SqlDataAdapter(query, con);
                     DataTable dtb = new DataTable();
-
                     adapter.Fill(dtb);
+
                     dgvItemList.Rows[i].Cells[0].Value = tbProductID.Text;
                     dgvItemList.Rows[i].Cells[1].Value = dtb.Rows[0][0].ToString();
                     dgvItemList.Rows[i].Cells[2].Value = tbQuantity.Text;
@@ -227,11 +228,11 @@ namespace CNPM_Project
                     new_total_amount= int.Parse(dtb.Rows[0][1].ToString()) * int.Parse(tbQuantity.Text);
                     lbTotalAmount.Text = (new_total_amount+int.Parse(lbTotalAmount.Text)-old_total_amount).ToString();
 
+                    con.Close();
+
                     tbProductID.Text = "";
                     tbQuantity.Text = "";
                     tbProductName.Text = "";
-
-                    con.Close();
                 }
                 else
                 {

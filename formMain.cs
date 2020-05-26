@@ -13,14 +13,14 @@ namespace CNPM_Project
 {
     public partial class formMain : Form
     {
+        formUpdateOrder updateOrder;
         formAccount account;
         formReport report;
         formLogin login;
-
         formCreateOrder createOrder;
 
         string role;
-        public string username;
+        string username;
         SqlConnection con;
         SqlCommand command;
         SqlDataAdapter adapter;
@@ -33,7 +33,7 @@ namespace CNPM_Project
             this.role = role;
             this.login = login;
         }
-        public void firstState_Order()
+        private void firstState_Order()
         {
             refreshOrderList();
             dgvOrderItem.DataSource = null;
@@ -46,7 +46,7 @@ namespace CNPM_Project
             bDeleteOrder.Enabled = false;
         }
 
-        public void firstState_Product()
+        private void firstState_Product()
         {
             refreshProductList();
 
@@ -64,7 +64,7 @@ namespace CNPM_Project
             tbProductStock.Text = "";
         }
 
-        public void firstState_Account()
+        private void firstState_Account()
         {
             refreshAccountList();
 
@@ -78,7 +78,7 @@ namespace CNPM_Project
             tbPassword.Text = "";
             cbRole.Text = "Select a role";
         }
-        public void refreshOrderList()
+        private void refreshOrderList()
         {
             con.Open();
 
@@ -155,22 +155,25 @@ namespace CNPM_Project
 
         private void dgvOrder_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i = dgvOrder.SelectedCells[0].RowIndex;
-            string query;
+            if (dgvOrder.SelectedCells.Count > 0)
+            {
+                int i = dgvOrder.SelectedCells[0].RowIndex;
+                string query;
 
-            con.Open();
+                con.Open();
 
-            bUpdateOrder.Enabled = true;
-            bDeleteOrder.Enabled = true;
-            bCreateOrder.Enabled = false;
+                query = "select * from _OrderItem where order_ID=" + dgvOrder.Rows[i].Cells[0].Value.ToString();
+                dtb = new DataTable();
+                adapter = new SqlDataAdapter(query, con);
+                adapter.Fill(dtb);
+                dgvOrderItem.DataSource = dtb;
 
-            query = "select * from _OrderItem where order_ID=" + dgvOrder.Rows[i].Cells[0].Value.ToString();
-            dtb = new DataTable();
-            adapter = new SqlDataAdapter(query, con);
-            adapter.Fill(dtb);
-            dgvOrderItem.DataSource = dtb;
+                con.Close();
 
-            con.Close();
+                bUpdateOrder.Enabled = true;
+                bDeleteOrder.Enabled = true;
+                bCreateOrder.Enabled = false;
+            }
         }
 
         private void formMain_FormClosing(object sender, FormClosingEventArgs e)
@@ -222,14 +225,22 @@ namespace CNPM_Project
 
         private void bUpdateOrder_Click(object sender, EventArgs e)
         {
+            int i = dgvOrder.SelectedCells[0].RowIndex;
 
+            updateOrder = new formUpdateOrder(dgvOrder.Rows[i].Cells[0].Value.ToString());
+
+            updateOrder.ShowDialog();
+
+            firstState_Order();
+            firstState_Product();
+            firstState_Account();
         }
 
         private void bClearOrder_Click(object sender, EventArgs e)
         {
             firstState_Order();
         }
-        public void refreshProductList()
+        private void refreshProductList()
         {
             string query;
             con.Open();
@@ -275,18 +286,21 @@ namespace CNPM_Project
 
         private void dgvProduct_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i = dgvProduct.SelectedCells[0].RowIndex;
+            if (dgvProduct.SelectedCells.Count > 0)
+            {
+                int i = dgvProduct.SelectedCells[0].RowIndex;
 
-            tbProductID.Text = dgvProduct.Rows[i].Cells[0].Value.ToString();
-            tbProductName.Text = dgvProduct.Rows[i].Cells[1].Value.ToString();
-            tbProductWarranty.Text = dgvProduct.Rows[i].Cells[2].Value.ToString();
-            tbProductAmount.Text = dgvProduct.Rows[i].Cells[3].Value.ToString();
-            tbProductStock.Text = dgvProduct.Rows[i].Cells[4].Value.ToString();
+                tbProductID.Text = dgvProduct.Rows[i].Cells[0].Value.ToString();
+                tbProductName.Text = dgvProduct.Rows[i].Cells[1].Value.ToString();
+                tbProductWarranty.Text = dgvProduct.Rows[i].Cells[2].Value.ToString();
+                tbProductAmount.Text = dgvProduct.Rows[i].Cells[3].Value.ToString();
+                tbProductStock.Text = dgvProduct.Rows[i].Cells[4].Value.ToString();
 
-            bUpdateProduct.Enabled = true;
-            bDeleteProduct.Enabled = true;
-            bCreateProduct.Enabled = false;
-            bSetStock.Enabled = true;
+                bUpdateProduct.Enabled = true;
+                bDeleteProduct.Enabled = true;
+                bCreateProduct.Enabled = false;
+                bSetStock.Enabled = true;
+            }
         }
 
         private void bClearProduct_Click(object sender, EventArgs e)
@@ -381,7 +395,7 @@ namespace CNPM_Project
                 MessageBox.Show("The information can not be blank!\nPlease fill it and retry!", "Error");
             }
         }
-        public void refreshAccountList()
+        private void refreshAccountList()
         {
             con.Open();
 
@@ -521,31 +535,34 @@ namespace CNPM_Project
 
         private void dgvAccount_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i = dgvAccount.SelectedCells[0].RowIndex;
-            string query;
-
-            con.Open();
-
-            tbUsername.Text = dgvAccount.Rows[i].Cells[0].Value.ToString();
-            tbPassword.Text = dgvAccount.Rows[i].Cells[1].Value.ToString();
-
-            for (int j = 0; j < cbRole.Items.Count; j++)
+            if (dgvAccount.SelectedCells.Count > 0)
             {
-                query = "select * from _" + cbRole.Items[j].ToString() + " where username='" + tbUsername.Text + "'";
-                adapter = new SqlDataAdapter(query, con);
-                dtb = new DataTable();
-                adapter.Fill(dtb);
-                    
-                if (dtb.Rows.Count > 0)
-                {
-                    cbRole.Text = cbRole.Items[j].ToString();
-                }
-            }
-            con.Close();
+                int i = dgvAccount.SelectedCells[0].RowIndex;
+                string query;
 
-            bUpdateAccount.Enabled = true;
-            bDeleteAccount.Enabled = true;
-            bCreateAccount.Enabled = false;
+                con.Open();
+
+                tbUsername.Text = dgvAccount.Rows[i].Cells[0].Value.ToString();
+                tbPassword.Text = dgvAccount.Rows[i].Cells[1].Value.ToString();
+
+                for (int j = 0; j < cbRole.Items.Count; j++)
+                {
+                    query = "select * from _" + cbRole.Items[j].ToString() + " where username='" + tbUsername.Text + "'";
+                    adapter = new SqlDataAdapter(query, con);
+                    dtb = new DataTable();
+                    adapter.Fill(dtb);
+
+                    if (dtb.Rows.Count > 0)
+                    {
+                        cbRole.Text = cbRole.Items[j].ToString();
+                    }
+                }
+                con.Close();
+
+                bUpdateAccount.Enabled = true;
+                bDeleteAccount.Enabled = true;
+                bCreateAccount.Enabled = false;
+            }
         }
 
         private void bReport_Click(object sender, EventArgs e)
