@@ -82,7 +82,11 @@ namespace CNPM_Project
         {
             con.Open();
 
-            string query = "select * from _Order";
+            string query = "select order_ID as 'Order ID'," +
+                                " customer_name as 'Customer Name'," +
+                                " customer_email as 'Customer Email'," +
+                                " customer_phone_number as 'Customer Phone Number'," +
+                                " total_amount as 'Total amount' from _Order";
             adapter = new SqlDataAdapter(query, con);
             dtb = new DataTable();
             adapter.Fill(dtb);
@@ -162,7 +166,9 @@ namespace CNPM_Project
 
                 con.Open();
 
-                query = "select * from _OrderItem where order_ID=" + dgvOrder.Rows[i].Cells[0].Value.ToString();
+                query = "select _OrderItem.product_ID as 'Product ID'," +
+                            " _Product.product_name as 'Product name'," +
+                            " _OrderItem.quantity as 'Quantity' from _OrderItem, _Product where _Product.product_ID=_OrderItem.product_ID and _OrderItem.order_ID=" + dgvOrder.Rows[i].Cells[0].Value.ToString();
                 dtb = new DataTable();
                 adapter = new SqlDataAdapter(query, con);
                 adapter.Fill(dtb);
@@ -245,7 +251,11 @@ namespace CNPM_Project
             string query;
             con.Open();
 
-            query = "select * from _Product";
+            query = "select product_ID as 'Product ID'," +
+                            " product_name as 'Product Name'," +
+                            " product_warranty as 'Product Warranty'," +
+                            " amount as 'Product Amount'," +
+                            " product_quantity as 'Stock' from _Product";
             adapter = new SqlDataAdapter(query, con);
             dtb = new DataTable();
             adapter.Fill(dtb);
@@ -399,7 +409,14 @@ namespace CNPM_Project
         {
             con.Open();
 
-            string query = "select * from _ShopUser";
+            string query = "select username as 'Username'," +
+                                " password as 'Password'," +
+                                " name as 'Account name'," +
+                                " date_of_birth as 'Date of birth'," +
+                                " gender as 'Gender'," +
+                                " email as 'Account email'," +
+                                " phone_number as 'Account phone number'," +
+                                " personal_ID as 'Account Personal ID' from _ShopUser";
             adapter = new SqlDataAdapter(query, con);
             dtb = new DataTable();
             adapter.Fill(dtb);
@@ -515,22 +532,29 @@ namespace CNPM_Project
             int i = dgvAccount.SelectedCells[0].RowIndex;
             string username = dgvAccount.Rows[i].Cells[0].Value.ToString();
             string query;
-
-            con.Open();
-
-            query = "delete from _" + cbRole.Text + " where username='" + username + "'";
-            command = new SqlCommand(query, con);
-            command.ExecuteNonQuery();
             
-            query = "delete from _ShopUser where username='" + username + "'";
-            command = new SqlCommand(query, con);
-            command.ExecuteNonQuery();
+            if (username!= this.username)
+            {
+                con.Open();
 
-            con.Close();
+                query = "delete from _" + cbRole.Text + " where username='" + username + "'";
+                command = new SqlCommand(query, con);
+                command.ExecuteNonQuery();
 
-            MessageBox.Show("The account has been deleted successfully!", "Result");
+                query = "delete from _ShopUser where username='" + username + "'";
+                command = new SqlCommand(query, con);
+                command.ExecuteNonQuery();
 
-            firstState_Account();
+                con.Close();
+
+                MessageBox.Show("The account has been deleted successfully!", "Result");
+
+                firstState_Account();
+            }
+            else
+            {
+                MessageBox.Show("You cannot delete your recent account which you are using!\nPlease try to delete other accounts", "Error");
+            }
         }
 
         private void dgvAccount_CellClick(object sender, DataGridViewCellEventArgs e)

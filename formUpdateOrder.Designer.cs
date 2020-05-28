@@ -38,10 +38,6 @@
             this.bUpdateOrder = new System.Windows.Forms.Button();
             this.bCancel = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.bClear = new System.Windows.Forms.Button();
-            this.bDeleteOrderItem = new System.Windows.Forms.Button();
-            this.bCreateOrderItem = new System.Windows.Forms.Button();
-            this.bUpdateOrderItem = new System.Windows.Forms.Button();
             this.tbProductName = new System.Windows.Forms.TextBox();
             this.tbProductID = new System.Windows.Forms.TextBox();
             this.tbQuantity = new System.Windows.Forms.TextBox();
@@ -139,10 +135,6 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.bClear);
-            this.groupBox2.Controls.Add(this.bDeleteOrderItem);
-            this.groupBox2.Controls.Add(this.bCreateOrderItem);
-            this.groupBox2.Controls.Add(this.bUpdateOrderItem);
             this.groupBox2.Controls.Add(this.tbProductName);
             this.groupBox2.Controls.Add(this.tbProductID);
             this.groupBox2.Controls.Add(this.tbQuantity);
@@ -157,65 +149,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Order Item";
             // 
-            // bClear
-            // 
-            this.bClear.Location = new System.Drawing.Point(494, 187);
-            this.bClear.Name = "bClear";
-            this.bClear.Size = new System.Drawing.Size(143, 44);
-            this.bClear.TabIndex = 4;
-            this.bClear.Text = "Clear selection";
-            this.bClear.UseVisualStyleBackColor = true;
-            this.bClear.Click += new System.EventHandler(this.bClear_Click);
-            // 
-            // bDeleteOrderItem
-            // 
-            this.bDeleteOrderItem.Location = new System.Drawing.Point(494, 137);
-            this.bDeleteOrderItem.Name = "bDeleteOrderItem";
-            this.bDeleteOrderItem.Size = new System.Drawing.Size(143, 44);
-            this.bDeleteOrderItem.TabIndex = 4;
-            this.bDeleteOrderItem.Text = "Delete item from the order";
-            this.bDeleteOrderItem.UseVisualStyleBackColor = true;
-            this.bDeleteOrderItem.Click += new System.EventHandler(this.bDeleteOrderItem_Click);
-            // 
-            // bCreateOrderItem
-            // 
-            this.bCreateOrderItem.Location = new System.Drawing.Point(494, 29);
-            this.bCreateOrderItem.Name = "bCreateOrderItem";
-            this.bCreateOrderItem.Size = new System.Drawing.Size(143, 51);
-            this.bCreateOrderItem.TabIndex = 4;
-            this.bCreateOrderItem.Text = "Add item to the order";
-            this.bCreateOrderItem.UseVisualStyleBackColor = true;
-            this.bCreateOrderItem.Click += new System.EventHandler(this.bCreateOrderItem_Click);
-            // 
-            // bUpdateOrderItem
-            // 
-            this.bUpdateOrderItem.Location = new System.Drawing.Point(494, 86);
-            this.bUpdateOrderItem.Name = "bUpdateOrderItem";
-            this.bUpdateOrderItem.Size = new System.Drawing.Size(143, 45);
-            this.bUpdateOrderItem.TabIndex = 4;
-            this.bUpdateOrderItem.Text = "Update item from the order";
-            this.bUpdateOrderItem.UseVisualStyleBackColor = true;
-            this.bUpdateOrderItem.Click += new System.EventHandler(this.bUpdateOrderItem_Click);
-            // 
             // tbProductName
             // 
             this.tbProductName.Enabled = false;
             this.tbProductName.Location = new System.Drawing.Point(109, 58);
             this.tbProductName.Name = "tbProductName";
-            this.tbProductName.Size = new System.Drawing.Size(379, 22);
+            this.tbProductName.Size = new System.Drawing.Size(528, 22);
             this.tbProductName.TabIndex = 3;
             // 
             // tbProductID
             // 
             this.tbProductID.Location = new System.Drawing.Point(109, 29);
             this.tbProductID.Name = "tbProductID";
-            this.tbProductID.Size = new System.Drawing.Size(216, 22);
+            this.tbProductID.Size = new System.Drawing.Size(373, 22);
             this.tbProductID.TabIndex = 3;
             this.tbProductID.TextChanged += new System.EventHandler(this.tbProductID_TextChanged);
             // 
             // tbQuantity
             // 
-            this.tbQuantity.Location = new System.Drawing.Point(411, 29);
+            this.tbQuantity.Location = new System.Drawing.Point(560, 29);
             this.tbQuantity.Name = "tbQuantity";
             this.tbQuantity.Size = new System.Drawing.Size(77, 22);
             this.tbQuantity.TabIndex = 3;
@@ -230,14 +182,14 @@
             this.dgvItemList.ReadOnly = true;
             this.dgvItemList.RowHeadersWidth = 51;
             this.dgvItemList.RowTemplate.Height = 24;
-            this.dgvItemList.Size = new System.Drawing.Size(482, 147);
+            this.dgvItemList.Size = new System.Drawing.Size(631, 147);
             this.dgvItemList.TabIndex = 2;
             this.dgvItemList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvItemList_CellClick);
             // 
             // lbQuantity
             // 
             this.lbQuantity.AutoSize = true;
-            this.lbQuantity.Location = new System.Drawing.Point(344, 32);
+            this.lbQuantity.Location = new System.Drawing.Point(491, 32);
             this.lbQuantity.Name = "lbQuantity";
             this.lbQuantity.Size = new System.Drawing.Size(61, 17);
             this.lbQuantity.TabIndex = 1;
@@ -322,10 +274,6 @@
         private System.Windows.Forms.Button bUpdateOrder;
         private System.Windows.Forms.Button bCancel;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button bClear;
-        private System.Windows.Forms.Button bDeleteOrderItem;
-        private System.Windows.Forms.Button bCreateOrderItem;
-        private System.Windows.Forms.Button bUpdateOrderItem;
         private System.Windows.Forms.TextBox tbProductName;
         private System.Windows.Forms.TextBox tbProductID;
         private System.Windows.Forms.TextBox tbQuantity;

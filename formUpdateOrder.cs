@@ -45,10 +45,6 @@ namespace CNPM_Project
         {
             dgvItemList.ClearSelection();
 
-            bCreateOrderItem.Enabled = true;
-            bUpdateOrderItem.Enabled = false;
-            bDeleteOrderItem.Enabled = false;
-
             tbProductID.Text = "";
             tbProductName.Text = "";
             tbQuantity.Text = "";
@@ -60,141 +56,25 @@ namespace CNPM_Project
 
         private void bUpdateOrder_Click(object sender, EventArgs e)
         {
+            string query;
             if (tbCustomerEmail.Text != "" & tbCustomerName.Text != "" & tbCustomerPhone.Text != "")
             {
-                if (int.Parse(lbTotalAmount.Text) > 0)
-                {
-                    string query;
+                con.Open();
 
-                    con.Open();
+                query = "update _Order set customer_name='"+tbCustomerName.Text+"', customer_email='"+tbCustomerEmail.Text+"', customer_phone_number='"+tbCustomerPhone.Text+"' where order_ID=" + order_ID;
+                command = new SqlCommand(query, con);
+                command.ExecuteNonQuery();
 
-                    query = "delete from _OrderItem where order_ID=" + order_ID;
-                    command = new SqlCommand(query, con);
-                    command.ExecuteNonQuery();
+                MessageBox.Show("The order was updated successfully!", "Result");
 
-                    query = "insert into _OrderItem(order_ID, product_ID, quantity)";
+                con.Close();
 
-                    for (int i = 0; i < dgvItemList.Rows.Count; i++)
-                    {
-                        if (dgvItemList.Rows[i].Cells[0].Value != null)
-                        {
-                            command = new SqlCommand(query + "values(" + order_ID + ",'" + dgvItemList.Rows[i].Cells[0].Value.ToString() + "'," + dgvItemList.Rows[i].Cells[2].Value.ToString() + ")", con);
-                            command.ExecuteNonQuery();
-                        }
-                    }
-                    MessageBox.Show("The order was updated successfully!", "Result");
-
-                    con.Close();
-
-                    this.Close();
-                }
-            }
-        }
-
-        private void bCreateOrderItem_Click(object sender, EventArgs e)
-        {
-            int parsedValue;
-            string query;
-
-            if (tbProductID.Text != "" & tbQuantity.Text != "")
-            {
-                if (tbProductName.Text != "Error! The product cannot be found!" & int.TryParse(tbQuantity.Text, out parsedValue) == true)
-                {
-                    foreach (DataGridViewRow row in dgvItemList.Rows)
-                    {
-                        if (row.Cells[0].Value.ToString() == tbProductID.Text)
-                        {
-                            MessageBox.Show("The product you want to add is already in this list!", "Error");
-                            return;
-                        }
-                    }
-
-                    con.Open();
-
-                    query = "select product_name,amount from _Product where product_ID='" + tbProductID.Text + "'";
-                    adapter = new SqlDataAdapter(query, con);
-                    DataTable dtb = new DataTable();
-                    adapter.Fill(dtb);
-
-                    dtb_orderItem.Rows.Add(tbProductID.Text, dtb.Rows[0][0].ToString(), tbQuantity.Text, dtb.Rows[0][1].ToString());
-
-                    lbTotalAmount.Text = (int.Parse(dtb.Rows[0][1].ToString()) * int.Parse(tbQuantity.Text) + int.Parse(lbTotalAmount.Text)).ToString();
-
-                    con.Close();
-
-                    firstState_OrderItem();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid input!\nPlease try again!", "Error");
-                }
+                this.Close();
             }
             else
             {
-                MessageBox.Show("You must fill both product ID and quantity!", "Error");
+                MessageBox.Show("You must fill all the information if you want to update the order!", "Error");
             }
-        }
-
-        private void bUpdateOrderItem_Click(object sender, EventArgs e)
-        {
-            int i = dgvItemList.SelectedCells[0].RowIndex;
-            int parsedValue;
-            int new_total_amount;
-            string query;
-            int old_total_amount = int.Parse(dgvItemList.Rows[i].Cells[3].Value.ToString()) * int.Parse(dgvItemList.Rows[i].Cells[2].Value.ToString());
-
-            if (tbProductID.Text != "" & tbQuantity.Text != "")
-            {
-                if (tbProductName.Text != "Error! The product cannot be found!" & int.TryParse(tbQuantity.Text, out parsedValue) == true)
-                {
-                    con.Open();
-
-                    query = "select product_name,amount from _Product where product_ID='" + tbProductID.Text + "'";
-                    adapter = new SqlDataAdapter(query, con);
-                    DataTable dtb = new DataTable();
-                    adapter.Fill(dtb);
-
-                    dgvItemList.Rows[i].Cells[0].Value = tbProductID.Text;
-                    dgvItemList.Rows[i].Cells[1].Value = dtb.Rows[0][0].ToString();
-                    dgvItemList.Rows[i].Cells[2].Value = tbQuantity.Text;
-                    dgvItemList.Rows[i].Cells[3].Value = dtb.Rows[0][1].ToString();
-
-                    new_total_amount = int.Parse(dtb.Rows[0][1].ToString()) * int.Parse(tbQuantity.Text);
-                    lbTotalAmount.Text = (new_total_amount + int.Parse(lbTotalAmount.Text) - old_total_amount).ToString();
-
-                    con.Close();
-
-                    firstState_OrderItem();
-                }
-                else
-                {
-                    MessageBox.Show("Invalid input!\nPlease try again!", "Error");
-                }
-            }
-            else
-            {
-                MessageBox.Show("You must fill both product ID and quantity!", "Error");
-            }
-        }
-
-        private void bDeleteOrderItem_Click(object sender, EventArgs e)
-        {
-            int i = dgvItemList.SelectedCells[0].RowIndex;
-            int quantity = int.Parse(dgvItemList.Rows[i].Cells[2].Value.ToString());
-            int amount = int.Parse(dgvItemList.Rows[i].Cells[3].Value.ToString());
-
-            dtb_orderItem.Rows.RemoveAt(i);
-
-            lbTotalAmount.Text = (int.Parse(lbTotalAmount.Text) - (quantity * amount)).ToString();
-
-            refreshOrderItemList();
-            firstState_OrderItem();
-        }
-
-        private void bClear_Click(object sender, EventArgs e)
-        {
-            refreshOrderItemList();
-            firstState_OrderItem();
         }
 
         private void formUpdateOrder_Load(object sender, EventArgs e)
@@ -231,10 +111,6 @@ namespace CNPM_Project
             if (dgvItemList.SelectedCells.Count > 0)
             {
                 int i = dgvItemList.SelectedCells[0].RowIndex;
-
-                bCreateOrderItem.Enabled = false;
-                bUpdateOrderItem.Enabled = true;
-                bDeleteOrderItem.Enabled = true;
 
                 tbProductID.Text = dgvItemList.Rows[i].Cells[0].Value.ToString();
                 tbProductName.Text = dgvItemList.Rows[i].Cells[1].Value.ToString();
